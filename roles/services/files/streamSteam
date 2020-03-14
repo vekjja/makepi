@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Wakeup GameBox for Steam Stream
-wakeonlan -i 10.0.0.255 bc:ae:c5:50:ef:49
-
-# Start Steam Stream
-steamlink
-

@@ -1,13 +1,13 @@
 [Unit]
-Description=Wake GameBox and Start Steam Link
+Description=Start Steam Link at Login
 
 [Service]
 Type=simple
 User=pi
+# ExecStart="wakeonlan -i 10.0.0.255 bc:ae:c5:50:ef:49"
+Environment="DISPLAY=:0"
 ExecStart=/usr/bin/steamlink
-#Restart=always
 Restart=on-failure
 
 [Install]
 WantedBy=graphical.target
-#WantedBy=multi-user.target
