@@ -1,5 +1,20 @@
 # Maintainer: Kevin Jayne
 
+cli_tools:
+  - autojump
+  - ctags
+  - coreutils
+  - curl 
+  - git
+  - htop
+  - jq
+  - neovim
+  - steamlink
+  - terminator
+  - wakeonlan
+  - wget
+  - zsh
+
 dotfiles:
   directories:
     - ~/.config/nvim
@@ -12,16 +27,5 @@ dotfiles:
     - { src: 'init.vim', dest: '~/.config/nvim/init.vim'}
     - { src: 'terminator.config', dest: '~/.config/terminator/config'}
 
-cli_tools:
-  - autojump
-  - ctags
-  - coreutils
-  - curl 
-  - git
-  - htop
-  - jq
-  - neovim
-  - steamlink
-  - terminator
-  - wget
-  - zsh
+services:
+  - steamLink.service
