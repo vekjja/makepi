@@ -13,3 +13,8 @@
     mode: '0644'
   with_items:
     - "{{ dotfiles.sources }}"
+
+- name: Install Oh My ZSH
+  git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: ~/.oh-my-zsh

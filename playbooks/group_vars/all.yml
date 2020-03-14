@@ -4,6 +4,7 @@ dotfiles:
   directories:
     - ~/.config/nvim
     - ~/.config/terminator
+    - ~/.history
   sources:
     - { src: '.zshrc', dest: '~/.zshrc'}
     - { src: '.vimrc', dest: '~/.vimrc'}
