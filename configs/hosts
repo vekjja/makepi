@@ -1,0 +1,4 @@
+# Inventory File for Ansible
+
+[raspberries]
+10.0.0.20

@@ -1,0 +1,8 @@
+# vim:ft=ansible
+
+- name: Install CLI Tools via Apt
+  become: true
+  apt:
+    pkg: "{{ cli_tools }}"
+    state: present
+    update_cache: "yes"

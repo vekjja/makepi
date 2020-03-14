@@ -1,0 +1,26 @@
+# Maintainer: Kevin Jayne
+
+dotfiles:
+  directories:
+    - ~/.config/nvim
+    - ~/.config/terminator
+  sources:
+    - { src: '.zshrc', dest: '~/.zshrc'}
+    - { src: '.vimrc', dest: '~/.vimrc'}
+    - { src: '.bashrc', dest: '~/.bashrc'}
+    - { src: 'init.vim', dest: '~/.config/nvim/init.vim'}
+    - { src: 'terminator.config', dest: '~/.config/terminator/config'}
+
+cli_tools:
+  - autojump
+  - ctags
+  - coreutils
+  - curl 
+  - git
+  - htop
+  - jq
+  - neovim
+  - steamlink
+  - terminator
+  - wget
+  - zsh

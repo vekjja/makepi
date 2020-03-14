@@ -1,0 +1,11 @@
+[Unit]
+Description=Stream Steam at Desktop Login
+
+[Service]
+Type=simple
+User=pi
+ExecStart=/home/pi/scripts/streamSteam
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target
