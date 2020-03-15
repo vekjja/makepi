@@ -1,6 +1,9 @@
 # Maintainer: Kevin Jayne
+options:
+  install:
+    ohmyzsh: true
 
-cli_tools:
+apt:
   - autojump
   - ctags
   - coreutils
@@ -15,17 +18,19 @@ cli_tools:
   - wget
   - zsh
 
-dotfiles:
-  directories:
-    - ~/.config/nvim
-    - ~/.config/terminator
-    - ~/.history
-  sources:
-    - { src: '.zshrc', dest: '~/.zshrc'}
-    - { src: '.vimrc', dest: '~/.vimrc'}
-    - { src: '.bashrc', dest: '~/.bashrc'}
-    - { src: 'init.vim', dest: '~/.config/nvim/init.vim'}
-    - { src: 'terminator.config', dest: '~/.config/terminator/config'}
+directories:
+  - ~/.config/nvim
+  - ~/.config/terminator
+  - ~/.history
 
-services:
-  - steamLink.service
+files:
+  - { src: '.zshrc', dest: '~/.zshrc'}
+  - { src: '.vimrc', dest: '~/.vimrc'}
+  - { src: '.bashrc', dest: '~/.bashrc'}
+  - { src: 'init.vim', dest: '~/.config/nvim/init.vim'}
+  - { src: 'terminator.config', dest: '~/.config/terminator/config'}
+
+# Order Matters!
+autostart:
+  - wakeonlan -i 10.0.0.255 bc:ae:c5:50:ef:49
+  - steamlink

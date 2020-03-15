@@ -1,20 +1,21 @@
 # vim:ft=ansible
-- name: Create Config Directories on Pi
+- name: Create Directories on Pi
   file: 
     path: "{{item}}"
     state: directory
   with_items:
-   - "{{ dotfiles.directories }}"
+   - "{{ directories }}"
 
-- name: Copy Dotfiles to Pi
+- name: Copy Files to Pi
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: '0644'
   with_items:
-    - "{{ dotfiles.sources }}"
+    - "{{ files }}"
 
 - name: Install Oh My ZSH
   git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: ~/.oh-my-zsh
+  when: options.install.ohmyzsh == True
