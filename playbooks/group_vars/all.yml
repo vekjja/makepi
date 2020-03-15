@@ -32,5 +32,8 @@ files:
 
 # Order Matters!
 autostart:
+  - "@lxpanel --profile LXDE-pi"
+  - "@pcmanfm --desktop --profile LXDE-pi"
+  - "@xscreensaver -no-splash"
   - wakeonlan -i 10.0.0.255 bc:ae:c5:50:ef:49
   - steamlink
