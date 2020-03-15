@@ -2,7 +2,6 @@
 
 - name: Provision Raspberry Pi Entertainmet Consoles
   hosts: raspberries
-  # connection: local
   gather_facts: true
   roles:
     - { role: cli, tags: [ 'init', 'cli' ]  }

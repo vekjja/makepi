@@ -75,6 +75,7 @@ alias l="tree -L 1"
 alias cls="clear"
 alias la="ls -lha --color=auto"
 alias wakeGameBox="wakeonlan -i 10.0.0.255 bc:ae:c5:50:ef:49"
+alias startSteam="wakeGameBox;steamLink"
 alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias listening="lsof -nP +c 15 | grep LISTEN"
 
