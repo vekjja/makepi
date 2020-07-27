@@ -1,6 +1,6 @@
 # EMN DevOps initializer
 
-- name: Provision Raspberry Pi Entertainmet Consoles
+- name: Provision Raspberry Pi Entertainment Consoles
   hosts: raspberries
   gather_facts: true
   roles:
