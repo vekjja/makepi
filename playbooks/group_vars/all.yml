@@ -1,6 +1,7 @@
 # Maintainer: Kevin Jayne
 options:
-  ssh_password: false
+  ssh:
+    PasswordAuthentication: "no"
   install:
     ohmyzsh: true
 

@@ -25,7 +25,6 @@
   lineinfile:
     path: /etc/ssh/sshd_config
     state: present
-    regexp: '#PasswordAuthentication'
-    line: "PasswordAuthentication no"
-  when: not options.ssh_password
+    regexp: '.*PasswordAuthentication (yes|no)'
+    line: "PasswordAuthentication {{options.ssh.PasswordAuthentication}}"
   notify: Restart SSH Service
