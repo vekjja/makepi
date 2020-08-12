@@ -19,3 +19,13 @@
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: ~/.oh-my-zsh
   when: options.install.ohmyzsh == True
+
+- name: Disable SSH Password
+  become: yes
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: '#PasswordAuthentication'
+    line: "PasswordAuthentication no"
+  when: not options.ssh_password
+  notify: Restart SSH Service
