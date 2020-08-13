@@ -31,6 +31,15 @@
     name: "{{ hostname }}"
   notify: Reboot the Machine
 
+- name: Use Legacy IPtables
+  alternatives:
+    name: "{{ item.name }}"
+    path: "{{ item.path }}"
+  loop:
+    - {name: "iptables", path: "/usr/sbin/iptables-legacy"}
+    - {name: "ip6tables", path: "/usr/sbin/ip6tables-legacy"}
+  notify: Reboot the Machine
+
 - name: Flush Handlers
   meta: flush_handlers
   args:
@@ -43,10 +52,29 @@
     mode: '0777'
 
 - name: Execute the K3S Installer
-  shell: "{{ k3s.tmpfile }}"
+  shell: "{{ k3s.tmpfile }} --no-deploy servicelb --no-deploy traefik"
   when: "'k3sMaster' is in group_names"
+
+# - name: Get K3S Node Token
+#   shell: cat {{ k3s.nodetoken }}
+#   register: nodetoken
+#   when: "'k3sMaster' is in group_names"
+
+# - name: Debug Node Token
+#   debug:
+#     msg: "K3S Node Token: {{ nodetoken.stdout }}"
 
 - name: Remove the K3S Installer
   file: 
     path: "{{ k3s.tmpfile }}"
     state: absent
+
+# Install MetalLB
+# helm install metallb stable/metallb --namespace kube-system \
+#   --set configInline.address-pools[0].name=default \
+#   --set configInline.address-pools[0].protocol=layer2 \
+#   --set configInline.address-pools[0].addresses[0]=10.0.1.1-10.0.1.254
+
+# Install Nginx Ingress
+# helm install nginx-ingress stable/nginx-ingress --namespace kube-system \
+#     --set defaultBackend.enabled=false
