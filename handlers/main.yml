@@ -6,4 +6,5 @@
     state: restarted
 
 - name: Reboot the Machine
+  become: yes
   reboot:

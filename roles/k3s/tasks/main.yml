@@ -7,6 +7,18 @@
     backrefs: yes
     regexp: '(.*rootwait)'
     line: '\1 cgroup_memory=1 cgroup_enable=memory'
+  notify: Reboot the Machine
+
+- name: Set Hostname
+  become: yes
+  hostname:
+    name: "{{ hostname }}"
+  notify: Reboot the Machine
+
+- name: Flush Handlers
+  meta: flush_handlers
+  args:
+    warn: false
 
 - name: Download K3S installer
   get_url: 

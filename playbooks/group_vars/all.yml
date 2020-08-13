@@ -4,7 +4,6 @@ options:
     PasswordAuthentication: "no"
   install:
     ohmyzsh: yes
-    k3s: yes
 
 k3s:
   url: https://get.k3s.io

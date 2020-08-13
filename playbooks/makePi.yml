@@ -20,7 +20,7 @@
     - import_role:
         name: k3s
       tags: [ 'init', 'k3s' ]
-      when: options.install.k3s
+      when: install_k3s|bool
   
   handlers:
      - import_tasks: ../handlers/main.yml
