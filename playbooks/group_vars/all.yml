@@ -5,10 +5,6 @@ options:
   install:
     ohmyzsh: yes
 
-k3s:
-  url: https://get.k3s.io
-  tmpfile: /tmp/k3s.sh
-
 apt:
   - autojump
   - ctags
@@ -41,6 +37,9 @@ autostart:
   - "@lxpanel --profile LXDE-pi"
   - "@pcmanfm --desktop --profile LXDE-pi"
   - "@xscreensaver -no-splash"
-  - wakeonlan -i 10.0.0.255 a8:5e:45:e3:e2:2e
-  - steamlink
+  # - wakeonlan -i 10.0.0.255 a8:5e:45:e3:e2:2e
+  # - steamlink
 
+k3s:
+  url: https://get.k3s.io
+  tmpfile: /tmp/k3s.sh

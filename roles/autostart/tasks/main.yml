@@ -1,6 +1,6 @@
 
 
-- name: Add a line to LXDE Session Autostart 
+- name: Add a Line to LXDE Session Autostart 
   lineinfile:
     path: .config/lxsession/LXDE-pi/autostart
     line: "{{ item }}"
