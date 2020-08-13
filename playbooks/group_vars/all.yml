@@ -41,5 +41,9 @@ autostart:
   # - steamlink
 
 k3s:
-  url: https://get.k3s.io
   tmpfile: /tmp/k3s.sh
+  url: https://get.k3s.io
+  node-token: /var/lib/rancher/k3s/server/node-token
+  static:
+    router: "10.0.0.1"
+    dns: "10.0.0.1 1.1.1.1 8.8.8.8"

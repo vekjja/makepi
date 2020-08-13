@@ -9,6 +9,22 @@
     line: '\1 cgroup_memory=1 cgroup_enable=memory'
   notify: Reboot the Machine
 
+- name: Set Current IP as Static
+  become: yes
+  lineinfile:
+    path: /etc/dhcpcd.conf
+    state: present
+    insertafter: "{{ item.after }}"
+    # regexp: "{{ item.after }}"
+    line: "{{ item.to }}"
+  loop:
+    - {after: '# Static IP Config for Eth0', to: "# Static IP Config for Eth0"}
+    - {after: '# Static IP Config for Eth0', to: "interface eth0"}
+    - {after: "interface eth0", to: "static domain_name_servers={{ k3s.static.dns }}"}
+    - {after: "interface eth0", to: "static routers={{ k3s.static.router }}"}
+    - {after: "interface eth0", to: "static ip_address={{ ansible_default_ipv4.address }}"}
+  notify: Reboot the Machine
+
 - name: Set Hostname
   become: yes
   hostname:

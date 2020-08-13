@@ -5,6 +5,6 @@ k3sMaster
 
 
 [k3sMaster]
-10.0.0.27 install_k3s=true hostname="k3s-master"
+10.0.0.27 install_k3s=true hostname="pi-master"
 
 [k3sWorker]
