@@ -3,7 +3,12 @@ options:
   ssh:
     PasswordAuthentication: "no"
   install:
-    ohmyzsh: true
+    ohmyzsh: yes
+    k3s: yes
+
+k3s:
+  url: https://get.k3s.io
+  tmpfile: /tmp/k3s.sh
 
 apt:
   - autojump
@@ -39,3 +44,4 @@ autostart:
   - "@xscreensaver -no-splash"
   - wakeonlan -i 10.0.0.255 a8:5e:45:e3:e2:2e
   - steamlink
+

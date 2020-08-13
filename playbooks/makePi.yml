@@ -3,7 +3,22 @@
 - name: Provision Raspberry Pi Entertainment Consoles
   hosts: raspberries
   gather_facts: true
-  roles:
-    - { role: apt, tags: [ 'init', 'apt' ]  }
-    - { role: config, tags: [ 'init', 'config' ]  }
-    - { role: autostart, tags: [ 'init', 'autostart' ]  }
+  tasks:
+
+    - import_role:
+        name: apt
+      tags: [ 'init', 'apt' ]
+  
+    - import_role:
+        name: config
+      tags: [ 'init', 'config' ]
+  
+    - import_role:
+        name: autostart
+      tags: [ 'init', 'autostart' ]
+  
+    - import_role:
+        name: k3s
+      tags: [ 'init', 'k3s' ]
+      when: options.install.k3s
+
