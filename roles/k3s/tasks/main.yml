@@ -8,16 +8,16 @@
     regexp: '(.*rootwait)'
     line: '\1 cgroup_memory=1 cgroup_enable=memory'
 
-# - name: Download K3S installer
-#   get_url: 
-#     url: "{{ k3s.url }}"
-#     dest: "{{ k3s.tmpfile }}"
-#     mode: '0777'
+- name: Download K3S installer
+  get_url: 
+    url: "{{ k3s.url }}"
+    dest: "{{ k3s.tmpfile }}"
+    mode: '0777'
 
-# - name: Execute the K3S Installer
-#   shell: "{{ k3s.tmpfile }}"
+- name: Execute the K3S Installer
+  shell: "{{ k3s.tmpfile }}"
 
-# - name: Remove the K3S Installer
-#   file: 
-#     path: "{{ k3s.tmpfile }}"
-#     state: absent
+- name: Remove the K3S Installer
+  file: 
+    path: "{{ k3s.tmpfile }}"
+    state: absent
