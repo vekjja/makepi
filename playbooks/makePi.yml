@@ -21,4 +21,7 @@
         name: k3s
       tags: [ 'init', 'k3s' ]
       when: options.install.k3s
+  
+  handlers:
+     - import_tasks: ../handlers/main.yml
 

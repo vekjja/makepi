@@ -20,7 +20,7 @@
     dest: ~/.oh-my-zsh
   when: options.install.ohmyzsh == True
 
-- name: Disable SSH Password
+- name: SSH Password Authentication
   become: yes
   lineinfile:
     path: /etc/ssh/sshd_config
