@@ -31,6 +31,14 @@
     name: "{{ hostname }}"
   notify: Reboot the Machine
 
+- name: Update /etc/hosts
+  become: yes
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1'
+    line: 127.0.1.1   {{ hostname }}
+  notify: Reboot the Machine
+
 - name: Use Legacy IPtables
   alternatives:
     name: "{{ item.name }}"
@@ -51,18 +59,19 @@
     dest: "{{ k3s.tmpfile }}"
     mode: '0777'
 
-- name: Execute the K3S Installer
-  shell: "{{ k3s.tmpfile }} --no-deploy servicelb --no-deploy traefik"
-  when: "'k3sMaster' is in group_names"
-
-# - name: Get K3S Node Token
-#   shell: cat {{ k3s.nodetoken }}
-#   register: nodetoken
+# - name: Execute the K3S Installer
+#   shell: "{{ k3s.tmpfile }} --no-deploy servicelb --no-deploy traefik"
 #   when: "'k3sMaster' is in group_names"
 
-# - name: Debug Node Token
-#   debug:
-#     msg: "K3S Node Token: {{ nodetoken.stdout }}"
+- name: Get K3S Node Token
+  become: yes
+  shell: cat {{ k3s.nodetoken }}
+  register: nodetoken
+  when: "'k3sMaster' is in group_names"
+
+- name: Debug Node Token
+  debug:
+    msg: "K3S Node Token: {{ nodetoken.stdout }}"
 
 - name: Remove the K3S Installer
   file: 
