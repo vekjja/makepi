@@ -2,9 +2,10 @@
 
 [raspberries:children]
 k3sMaster
-
+k3sNodes
 
 [k3sMaster]
 10.0.0.27 install_k3s=true hostname="pi-master"
 
-[k3sWorker]
+[k3sNodes]
+10.0.0.32 install_k3s=true hostname="pi-node-01"
