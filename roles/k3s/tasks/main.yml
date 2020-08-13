@@ -60,13 +60,31 @@
     dest: "{{ k3s.tmpfile }}"
     mode: '0777'
 
-# - name: Execute the K3S Installer
-#   shell: "{{ k3s.tmpfile }} --no-deploy servicelb --no-deploy traefik"
-#   when: "'k3sMaster' is in group_names"
+- name: Execute the K3S Installer
+  shell: "{{ k3s.tmpfile }} --no-deploy servicelb --no-deploy traefik"
+  when: "'k3sMaster' is in group_names"
+
+- name: Get K3S Kubeconfig
+  become: yes
+  run_once: yes
+  fetch:
+    src: "{{ k3s.kubeconfig }}"
+    dest: "{{ k3s.local_kubeconfig }}"
+    flat: yes
+  when: "'k3sMaster' is in group_names"
+
+- name: Update Local Kubeconfig
+  delegate_to: localhost
+  run_once: yes
+  replace:
+    path: "{{ k3s.local_kubeconfig}}"
+    regexp: '127\.0\.0\.1'
+    replace: "{{ hostvars[groups['k3sMaster'][0]]['ansible_eth0']['ipv4']['address'] }}"
 
 - name: Get K3S Node Token
-  delegate_to: "{{ groups['k3sMaster'][0] }}"
   become: yes
+  run_once: yes
+  delegate_to: "{{ groups['k3sMaster'][0] }}"
   shell: cat {{ k3s.nodetoken }}
   register: nodetoken
 
@@ -85,13 +103,3 @@
   file: 
     path: "{{ k3s.tmpfile }}"
     state: absent
-
-# Install MetalLB
-# helm install metallb stable/metallb --namespace kube-system \
-#   --set configInline.address-pools[0].name=default \
-#   --set configInline.address-pools[0].protocol=layer2 \
-#   --set configInline.address-pools[0].addresses[0]=10.0.1.1-10.0.1.254
-
-# Install Nginx Ingress
-# helm install nginx-ingress stable/nginx-ingress --namespace kube-system \
-#     --set defaultBackend.enabled=false

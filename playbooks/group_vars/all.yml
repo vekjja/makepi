@@ -44,6 +44,8 @@ k3s:
   tmpfile: /tmp/k3s.sh
   url: https://get.k3s.io
   nodetoken: /var/lib/rancher/k3s/server/node-token
+  kubeconfig: /etc/rancher/k3s/k3s.yaml
+  local_kubeconfig: ~/.kube/k3sconfig
   static:
     router: "10.0.0.1"
     dns: "10.0.0.1 1.1.1.1 8.8.8.8"
