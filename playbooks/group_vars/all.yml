@@ -14,6 +14,8 @@ apt:
   - htop
   - jq
   - neovim
+  - nfs-common
+  - nfs-kernel-server
   - steamlink
   - terminator
   - wakeonlan
