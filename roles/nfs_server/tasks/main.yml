@@ -1,0 +1,10 @@
+
+
+- name: Install NFS Server Apt Packages
+  become: true
+  apt:
+    pkg: nfs-kernel-server
+    state: present
+    update_cache: "yes"
+
+

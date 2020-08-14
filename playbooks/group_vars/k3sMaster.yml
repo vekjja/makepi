@@ -1,6 +1,7 @@
 
 
 fs_mount: true
+nfs_server: true
 install_k3s: true
 
 fs_mounts:
