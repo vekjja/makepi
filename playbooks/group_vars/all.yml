@@ -50,5 +50,7 @@ k3s:
     router: "10.0.0.1"
     dns: "10.0.0.1 1.1.1.1 8.8.8.8"
 
-fstab:
-  - {dir: /home/pi/Movies, mount: "//GAMEBOX/Movies  /home/pi/Movies  cifs uid=nobody,iocharset=utf8,noperm 0 0"}
+fs_mounts:
+  # - {path: /home/pi/Media, src: "UUID=5ff0421c-f9e0-4d11-8a25-be5cb5737294", fstype: ext4, opts: defaults,errors=remount-ro 0 1}
+  # - {path: /home/pi/Movies, src: "//GAMEBOX/Movies", fstype:   cifs,  opts: "uid=nobody,iocharset=utf8,noperm 0 0"}
+  # - {path: /path/to/mount/point, src: "UUID={YOUR-UID}", fstype: {file-system-type},   opts: defaults,errors=remount-ro 0 1}

@@ -16,6 +16,11 @@
     - import_role:
         name: autostart
       tags: [ 'init', 'autostart' ]
+
+    - import_role:
+        name: fs_mount
+      tags: [ 'init', 'fs_mount' ]
+      when: fs_mount|bool
   
     - import_role:
         name: k3s

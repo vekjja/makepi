@@ -1,0 +1,11 @@
+# vim:ft=ansible
+
+- name: Mount Devices to Local Filesystem
+  become: yes
+  mount:
+    path: "{{ item.path }}"
+    src: "{{ item.src }}"
+    fstype: "{{ item.fstype }}"
+    opts: "{{ item.opts }}"
+    state: mounted
+  loop: "{{fs_mounts}}"

@@ -5,7 +5,7 @@ k3sMaster
 k3sNodes
 
 [k3sMaster]
-10.0.0.27 install_k3s=true hostname="pi-master"
+10.0.0.27 install_k3s=true hostname="pi-master" fs_mount=true
 
 [k3sNodes]
-10.0.0.32 install_k3s=true hostname="pi-node-01"
+# 10.0.0.32 install_k3s=true hostname="pi-node-01"
