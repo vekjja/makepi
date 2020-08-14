@@ -6,19 +6,27 @@
   with_items:
    - "{{ directories }}"
 
-- name: Copy Files to Pi
+- name: Copy Config Files to Pi
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: '0644'
   with_items:
-    - "{{ files }}"
+    - "{{ config_files }}"
 
 - name: Install Oh My ZSH
   git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: ~/.oh-my-zsh
   when: install_ohmyzsh|bool
+
+- name: Set Authorized Keys
+  authorized_key:
+    user: pi
+    state: present
+    key: "{{ lookup('file', item) }}"
+  with_fileglob:
+    - files/pub_keys/*.pub
 
 - name: SSH Password Authentication
   become: yes

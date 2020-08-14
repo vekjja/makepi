@@ -1,10 +1,9 @@
 # Maintainer: Kevin Jayne
-ssh:
-  PasswordAuthentication: "no"
-  public_keys:
-    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+sFtH2o+FxlTDAuPGvBIFrOqsLOxNmWFv4F51HrcbgMZ4LqwUhSi5Hx6o9vgF9sSGJhNaOUjmCbj6DsU4Cs9cHgCDeiYbOwjucLIc1XSjc3ON+geS2PLpif48hEyHwhIhkZWllUXTOX4z9qbfsIpAKAdBKumqj5yIIB9ZOAqWukFTFPSlFTZH5Ps1SWI+CkrJvD9DlmrFh6jg4Yakvrr+p3/rHyw5xL6xwq3n5rxxBepO5NnSpmNOW3MYMWnXGWigXnpWum9huBpeEOGgHXq1viCsw7XUOr4VCSJjAacbHaBuBCavUomxyQUfXV1nYk97z9CMBsy9UBnDCOTzyokp kevinjayne@Kevins-MacBook-Pro.local
 
 install_ohmyzsh: yes
+
+ssh:
+  PasswordAuthentication: "no"
 
 apt:
   - autojump
@@ -27,7 +26,7 @@ directories:
   - ~/.config/terminator
   - ~/.history
 
-files:
+config_files:
   - { src: '.zshrc', dest: '~/.zshrc'}
   - { src: '.vimrc', dest: '~/.vimrc'}
   - { src: '.bashrc', dest: '~/.bashrc'}
