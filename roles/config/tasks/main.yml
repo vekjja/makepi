@@ -18,7 +18,7 @@
   git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: ~/.oh-my-zsh
-  when: options.install.ohmyzsh == True
+  when: install_ohmyzsh|bool
 
 - name: SSH Password Authentication
   become: yes
@@ -26,5 +26,5 @@
     path: /etc/ssh/sshd_config
     state: present
     regexp: '.*PasswordAuthentication (yes|no)'
-    line: "PasswordAuthentication {{options.ssh.PasswordAuthentication}}"
+    line: "PasswordAuthentication {{ ssh.PasswordAuthentication }}"
   notify: Restart SSH Service
