@@ -50,5 +50,3 @@ k3s:
     router: "10.0.0.1"
     dns: "10.0.0.1 1.1.1.1 8.8.8.8"
 
-fstab:
-  - {dir: /home/pi/Movies, mount: "//GAMEBOX/Movies  /home/pi/Movies  cifs uid=nobody,iocharset=utf8,noperm 0 0"}
