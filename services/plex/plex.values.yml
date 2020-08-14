@@ -1,9 +1,11 @@
 
+
+# git clone https://github.com/munnerz/kube-plex.git
 # helm install plex kube-plex/charts/kube-plex/ \
 #   --values values.yml \
 #   --namespace media
 
-claimToken: "claim-Dp24xiiTWi3bK_LgZLyT" # Replace `<CLAIM_TOKEN>` by the token obtained previously.
+claimToken: "claim-ps_pWFVsUymBNm6yywy_" # Replace `<CLAIM_TOKEN>` by the token obtained previously.
 
 image:
   repository: linuxserver/plex
@@ -24,13 +26,16 @@ rbac:
 
 nodeSelector: {}
 
-persistence:
-  transcode:
-    claimName: "media-hdd"
-  data:
-    claimName: "media-hdd"
-  config:
-    claimName: "media-hdd"
+# ingress:
+#   enabled: true
+
+# persistence:
+#   transcode:
+#     claimName: "media-hdd"
+#   data:
+#     claimName: "media-hdd"
+#   config:
+#     claimName: "media-hdd"
 
 resources: {}
 podAnnotations: {}

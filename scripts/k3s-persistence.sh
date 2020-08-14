@@ -2,6 +2,8 @@
 
 K3SCONFIG=~/.kube/k3sconfig
 
+ kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+
 # Create Media PV
 cat <<EOF | kubectl --kubeconfig=${K3SCONFIG} apply -f -
 ---
@@ -14,7 +16,7 @@ metadata:
 spec:
   storageClassName: "manual"
   capacity:
-    storage: "660Gi"
+    storage: "210Gi"
   accessModes:
     - ReadWriteMany
   hostPath:
@@ -24,7 +26,6 @@ EOF
 
 # Create Media PVC
 cat <<EOF | kubectl --kubeconfig=${K3SCONFIG} apply -f -
-# media.persistentvolumeclaim.yml
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -37,6 +38,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: "660Gi"
+      storage: "200Gi"
 ---
 EOF
