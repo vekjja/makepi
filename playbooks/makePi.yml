@@ -25,7 +25,7 @@
     - import_role:
         name: nfs_server
       tags: [ 'init', 'nfs_server' ]
-      when: nfs_server|bool
+      when: nfs_shares is defined
   
     - import_role:
         name: k3s
