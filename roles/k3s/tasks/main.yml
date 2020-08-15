@@ -15,7 +15,6 @@
     path: /etc/dhcpcd.conf
     state: present
     insertafter: "{{ item.after }}"
-    # regexp: "{{ item.after }}"
     line: "{{ item.to }}"
   loop:
     - {after: '# Static IP Config for Eth0', to: "# Static IP Config for Eth0"}
