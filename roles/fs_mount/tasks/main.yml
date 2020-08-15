@@ -8,4 +8,4 @@
     fstype: "{{ item.fstype }}"
     opts: "{{ item.opts }}"
     state: mounted
-  loop: "{{fs_mounts}}"
+  loop: "{{ fs_mounts }}"

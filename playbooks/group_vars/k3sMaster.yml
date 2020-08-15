@@ -1,6 +1,5 @@
 
 
-fs_mount: true
 nfs_server: true
 install_k3s: true
 
@@ -8,3 +7,6 @@ fs_mounts:
   - {path: /mnt/media, src: "UUID=B2AE1CCEAE1C8D4B", fstype: ntfs, opts: defaults,errors=remount-ro 0 0}
   # - {path: /home/pi/Movies, src: "//GAMEBOX/Movies", fstype:   cifs,  opts: "uid=nobody,iocharset=utf8,noperm 0 0"}
   # - {path: /path/to/mount/point, src: "UUID={YOUR-UID}", fstype: {file-system-type},   opts: defaults,errors=remount-ro 0 1}
+
+nfs_shares:
+  - /mnt/media *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
