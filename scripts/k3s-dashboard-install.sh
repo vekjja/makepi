@@ -1,13 +1,12 @@
 #!/bin/bash
 
-K3SCONFIG=~/.kube/k3sconfig
 VERSION=v2.0.3
 
 # Install Kube Dashboard
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${VERSION}/aio/deploy/recommended.yaml
 
 # Create admin-user
-cat <<EOF | kubectl --kubeconfig=${K3SCONFIG} apply -f -
+cat <<EOF | kubectl apply -f -
 ---
 apiVersion: v1
 kind: ServiceAccount
