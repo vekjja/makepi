@@ -102,7 +102,7 @@ function gpa() {
   
 #### Quick Dial ####
 alias hack_hosts="sudo vim /etc/hosts"
-alias chrome-socks='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --proxy-server="socks5://127.0.0.1:8080" --host-resolver-rules="MAP * 0.0.0.0 , EXCLUDE localhost"'
+alias temp="/opt/vc/bin/vcgencmd measure_temp"
 
 function enc() {
   openssl des -in ${1} -out ${1}.enc

@@ -62,7 +62,7 @@ ingress:
       paths: 
         - /
   tls: 
-    - secretName: demo-cloud-prod-tls
+    - secretName: demo-livingroom-cloud-prod-tls
       hosts:
         - demo.livingroom.cloud
 

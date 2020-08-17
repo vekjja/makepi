@@ -2,12 +2,12 @@
 
 kubectl create ns cert-manager |:
 
-# Install cert-manager CRD
-kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml
-# kubectl delete --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml
-
-# helm repo add jetstack https://charts.jetstack.io && helm repo update
-helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager  --version v0.16.0
+helm repo add jetstack https://charts.jetstack.io && helm repo update
+helm install \
+ cert-manager jetstack/cert-manager \
+ --namespace cert-manager \
+ --version v0.16.1 \
+ --set installCRDs=true
 
 echo "Sleeping 30 seconds to wait for cert-manager webhooks"
 sleep 30
@@ -19,7 +19,6 @@ apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
-  namespace: cert-manager
 spec:
   acme:
     email: seemywings@gmail.com
@@ -40,7 +39,6 @@ apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
-  namespace: cert-manager
 spec:
   acme:
     email: seemywings@gmail.com
