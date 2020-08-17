@@ -23,9 +23,9 @@
       when: fs_mounts is defined
     
     - import_role:
-        name: nfs_server
-      tags: [ 'init', 'nfs_server' ]
-      when: nfs_shares is defined
+        name: nfs
+      tags: [ 'init', 'nfs' ]
+      when: nfs_shares is defined or nfs_mounts is defined
   
     - import_role:
         name: k3s
