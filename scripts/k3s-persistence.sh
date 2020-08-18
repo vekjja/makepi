@@ -1,43 +1,40 @@
 #!/bin/bash
 
-K3SCONFIG=~/.kube/k3sconfig
-
- kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+# kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 
 # Create Media PV
-cat <<EOF | kubectl --kubeconfig=${K3SCONFIG} apply -f -
+cat <<EOF | kubectl apply -f -
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "media-hdd"
+  name: "str-hdd"
   labels:
     type: "local"
 spec:
   storageClassName: "manual"
   capacity:
-    storage: "210Gi"
+    storage: 1Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   hostPath:
-    path: "/mnt/media"
+    path: "/mnt/str"
 ---
 EOF
 
 # Create Media PVC
-cat <<EOF | kubectl --kubeconfig=${K3SCONFIG} apply -f -
+cat <<EOF | kubectl apply -f -
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  namespace: "media"
-  name: "media-hdd"
+  name: str-hdd-volume
 spec:
-  storageClassName: "manual"
+  storageClassName: manual
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
-      storage: "200Gi"
+      storage: 1Gi
 ---
 EOF
