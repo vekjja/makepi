@@ -1,12 +1,12 @@
 #!/bin/bash
 
-kubectl create ns cert-manager |:
+kubectl create ns cert-manager ||:
 
 helm repo add jetstack https://charts.jetstack.io && helm repo update
+
 helm install \
  cert-manager jetstack/cert-manager \
  --namespace cert-manager \
- --version v0.16.1 \
  --set installCRDs=true
 
 echo "Sleeping 30 seconds to wait for cert-manager webhooks"
