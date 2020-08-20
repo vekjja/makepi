@@ -18,8 +18,8 @@
       tags: [ 'init', 'autostart' ]
 
     - import_role:
-        name: fs_mount
-      tags: [ 'init', 'fs_mount' ]
+        name: fs
+      tags: [ 'init', 'fs' ]
       when: fs_mounts is defined
     
     - import_role:

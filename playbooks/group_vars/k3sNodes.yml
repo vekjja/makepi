@@ -5,6 +5,6 @@ install_k3s: true
   # - {path: /path/to/mount/point, src: "UUID={YOUR-UID}", fstype: {file-system-type},   opts: defaults,errors=remount-ro 0 0}
 
 nfs_mounts:
-  - {path: /mnt/str, src: "10.0.0.224:/mnt/str", fstype: nfs,  opts: rw}
-  - {path: /mnt/media, src: "10.0.0.224:/mnt/media", fstype: nfs,  opts: rw}
+  - {path: /mnt/hdd/str, src: "10.0.0.224:/mnt/hdd/str", fstype: nfs,  opts: rw}
+  - {path: /mnt/hdd/media, src: "10.0.0.224:/mnt/hdd/media", fstype: nfs,  opts: rw}
   # - {path: /home/pi/Movies, src: "//GAMEBOX/Movies", fstype:   cifs,  opts: "uid=nobody,iocharset=utf8,noperm 0 0"}
