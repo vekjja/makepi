@@ -2,7 +2,8 @@
 
 kubectl create ns cert-manager ||:
 
-helm repo add jetstack https://charts.jetstack.io && helm repo update
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
 
 helm install \
  cert-manager jetstack/cert-manager \
@@ -12,6 +13,7 @@ helm install \
 echo "Sleeping 30 seconds to wait for cert-manager webhooks"
 sleep 30
 
+echo Defining Cert Manager Cluster Issuers 
 # Certificate Issuer LetsEncrypt Staging 
 cat <<EOF | kubectl apply -f -
 ---
