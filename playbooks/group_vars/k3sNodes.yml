@@ -5,6 +5,7 @@ install_k3s: true
   # - {path: /path/to/mount/point, src: "UUID={YOUR-UID}", fstype: {file-system-type},   opts: "defaults,nobootwait,nofail,errors=remount-ro"}
 
 nfs_mounts:
-  - {path: /mnt/hdd/str, src: "pi-master.local:/mnt/hdd/str", fstype: nfs,  opts: rw}
-  - {path: /mnt/hdd/media, src: "pi-master.local:/mnt/hdd/media", fstype: nfs,  opts: rw}
+  - {path: /mnt/hdd/media, src: "pi-master.local:/mnt/hdd/media", fstype: nfs,  opts: rw,_netdev}
+  - {path: /mnt/hdd/str, src: "pi-master.local:/mnt/hdd/str", fstype: nfs,  opts: rw,_netdev}
+  - {path: /mnt/hdd/tera, src: "pi-master.local:/mnt/hdd/tera", fstype: nfs,  opts: rw,_netdev}
   # - {path: /home/pi/Movies, src: "//GAMEBOX/Movies", fstype:   cifs,  opts: "uid=nobody,iocharset=utf8,noperm 0 0"}
