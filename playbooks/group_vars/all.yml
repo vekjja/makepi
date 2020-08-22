@@ -11,8 +11,10 @@ apt:
   - coreutils
   - curl 
   - git
+  - hddtemp
   - htop
   - jq
+  - lm-sensors
   - neovim
   - nfs-common
   - steamlink
