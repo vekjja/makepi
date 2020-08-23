@@ -2,7 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# helm upgrade --install nginx-test chart --values values.yaml --namespace test
 # helm upgrade --install nginx-demo services/demo/chart --values services/demo/values.yaml --namespace demo
 
 replicaCount: 1

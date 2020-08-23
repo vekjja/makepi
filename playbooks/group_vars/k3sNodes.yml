@@ -8,4 +8,5 @@ nfs_mounts:
   - {path: /mnt/hdd/media, src: "pi-master.local:/mnt/hdd/media", fstype: nfs,  opts: rw,_netdev}
   - {path: /mnt/hdd/str, src: "pi-master.local:/mnt/hdd/str", fstype: nfs,  opts: rw,_netdev}
   - {path: /mnt/hdd/tera, src: "pi-master.local:/mnt/hdd/tera", fstype: nfs,  opts: rw,_netdev}
+  - {path: /mnt/ssd/pny250, src: "pi-master.local:/mnt/ssd/pny250", fstype: nfs,  opts: rw,_netdev}
   # - {path: /home/pi/Movies, src: "//GAMEBOX/Movies", fstype:   cifs,  opts: "uid=nobody,iocharset=utf8,noperm 0 0"}
