@@ -1,40 +1,39 @@
 #!/bin/bash
 
-# kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+# kubectl delete -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 
 # Create Media PV
-cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl delete -f -
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "str-hdd"
+  name: "ssd-pny250"
   labels:
     type: "local"
 spec:
-  storageClassName: "manual"
+  storageClassName: "local-path"
   capacity:
-    storage: 1Gi
+    storage: "200Gi"
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   hostPath:
-    path: "/mnt/str"
----
+    path: "/mnt/ssd/pny250"
 EOF
 
 # Create Media PVC
-cat <<EOF | kubectl apply -f -
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: str-hdd-volume
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-EOF
+# cat <<EOF | kubectl delete -f -
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   namespace: "plex"
+#   name: "ssd-plex"
+# spec:
+#   storageClassName: "local-path"
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: "120Gi"
+# EOF
