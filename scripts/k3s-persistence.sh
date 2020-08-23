@@ -1,20 +1,54 @@
 #!/bin/bash
 
-# kubectl delete -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+# kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 
-# Create Media PV
-cat <<EOF | kubectl delete -f -
+cat <<EOF | kubectl apply -f -
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "ssd-pny250"
-  labels:
-    type: "local"
+  name: "hdd-tera-300"
 spec:
-  storageClassName: "local-path"
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "hdd-tera-300"
   capacity:
-    storage: "200Gi"
+    storage: "300Gi"
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/hdd/tera"
+EOF
+
+# Create Media PV
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "ssd-pny250-120"
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "ssd-pny250-120"
+  capacity:
+    storage: "120Gi"
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/ssd/pny250"
+EOF
+
+# Create Media PV
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "ssd-pny250-1"
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "ssd-pny250-1"
+  capacity:
+    storage: "1Gi"
   accessModes:
     - ReadWriteMany
   hostPath:
@@ -22,18 +56,18 @@ spec:
 EOF
 
 # Create Media PVC
-# cat <<EOF | kubectl delete -f -
+# cat <<EOF | kubectl apply -f -
 # ---
 # apiVersion: v1
 # kind: PersistentVolumeClaim
 # metadata:
 #   namespace: "plex"
-#   name: "ssd-plex"
+#   name: "plex-ssd"
 # spec:
-#   storageClassName: "local-path"
+#   storageClassName: "media-ssd"
 #   accessModes:
-#     - ReadWriteOnce
+#     - ReadWriteMany
 #   resources:
 #     requests:
-#       storage: "120Gi"
+#       storage: "200Gi"
 # EOF
