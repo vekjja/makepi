@@ -71,6 +71,8 @@
     dest: "{{ k3s.local_kubeconfig }}"
     flat: yes
   when: "'k3sMaster' is in group_names"
+  tags:
+    - get-kubeconfig
 
 - name: Update Local Kubeconfig
   delegate_to: localhost
