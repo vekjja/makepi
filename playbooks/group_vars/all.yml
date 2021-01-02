@@ -3,7 +3,7 @@
 install_ohmyzsh: yes
 
 ssh:
-  PasswordAuthentication: "no"
+  PasswordAuthentication: "yes"
 
 apt:
   - autojump
