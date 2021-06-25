@@ -7,7 +7,6 @@ fs_mounts:
   - {path: /mnt/hdd/str, src: "UUID=04D873930CCCBD41", fstype: ntfs, opts: "defaults,nobootwait,nofail,errors=remount-ro"}
   - {path: /mnt/hdd/tera, src: "UUID=D4504CF8504CE33A", fstype: ntfs, opts: "defaults,nobootwait,nofail,errors=remount-ro"}
   - {path: /mnt/ssd/pny250, src: "UUID=1DAC99F73EFA9CB8", fstype: ntfs, opts: "defaults,nobootwait,nofail,errors=remount-ro"}
-  # - {path: /home/pi/Movies, src: "//GAMEBOX/Movies", fstype:   cifs,  opts: "uid=nobody,iocharset=utf8,noperm,_netdev"}
   # - {path: /path/to/mount/point, src: "UUID={YOUR-UID}", fstype: {file-system-type}, opts: "defaults,nobootwait,nofail,errors=remount-ro"}
 
 nfs_shares:
