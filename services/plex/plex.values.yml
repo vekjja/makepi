@@ -50,11 +50,11 @@ ingress:
     cert-manager.io/cluster-issuer: "letsencrypt-prod",
   }
   hosts:
-    - livingroom.cloud
+    - plex.livingroom.cloud
   tls: 
-    - secretName: livingroom-cloud-tls
+    - secretName: plex-livingroom-cloud-tls
       hosts:
-        - livingroom.cloud
+        - plex.livingroom.cloud
         
 rbac:
   create: true
