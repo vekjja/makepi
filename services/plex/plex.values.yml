@@ -6,7 +6,7 @@
 
 image:
   repository: linuxserver/plex
-  tag: arm32v7-latest
+  tag: latest
   pullPolicy: IfNotPresent
 
 kubePlex:
