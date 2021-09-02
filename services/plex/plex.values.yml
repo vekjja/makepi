@@ -7,7 +7,7 @@
 image:
   repository: linuxserver/plex
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 kubePlex:
   enabled: false
