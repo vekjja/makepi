@@ -54,20 +54,3 @@ spec:
   hostPath:
     path: "/mnt/ssd/pny250"
 EOF
-
-# Create Media PVC
-# cat <<EOF | kubectl apply -f -
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   namespace: "plex"
-#   name: "plex-ssd"
-# spec:
-#   storageClassName: "media-ssd"
-#   accessModes:
-#     - ReadWriteMany
-#   resources:
-#     requests:
-#       storage: "200Gi"
-# EOF
