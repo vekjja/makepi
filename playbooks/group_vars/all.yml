@@ -9,7 +9,7 @@ apt:
   - autojump
   - ctags
   - coreutils
-  - curl 
+  - curl
   - git
   - hddtemp
   - htop
@@ -29,11 +29,11 @@ directories:
   - ~/.history
 
 config_files:
-  - { src: '.zshrc', dest: '~/.zshrc'}
-  - { src: '.vimrc', dest: '~/.vimrc'}
-  - { src: '.bashrc', dest: '~/.bashrc'}
-  - { src: 'init.vim', dest: '~/.config/nvim/init.vim'}
-  - { src: 'terminator.config', dest: '~/.config/terminator/config'}
+  - { src: ".zshrc", dest: "~/.zshrc" }
+  - { src: ".vimrc", dest: "~/.vimrc" }
+  - { src: ".bashrc", dest: "~/.bashrc" }
+  - { src: "init.vim", dest: "~/.config/nvim/init.vim" }
+  - { src: "terminator.config", dest: "~/.config/terminator/config" }
 
 # Order Matters!
 autostart:
@@ -43,13 +43,14 @@ autostart:
   # - wakeonlan -i 10.0.0.255 a8:5e:45:e3:e2:2e
   # - steamlink
 
+# Lightweight Kubernetes: https://github.com/k3s-io/k3s/releases/
 k3s:
   tmpfile: /tmp/k3s.sh
   url: https://get.k3s.io
   nodetoken: /var/lib/rancher/k3s/server/node-token
   kubeconfig: /etc/rancher/k3s/k3s.yaml
+  args: "--no-deploy servicelb --no-deploy traefik"
   local_kubeconfig: ~/.kube/k3sconfig
   static:
     router: "10.0.0.1"
     dns: "10.0.0.1 1.1.1.1 8.8.8.8"
-

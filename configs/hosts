@@ -8,5 +8,5 @@ k3sNodes
 10.0.0.221 hostname="pi-master"
 
 [k3sNodes]
-10.0.0.60 hostname="pi-node-01"
-10.0.0.32 hostname="pi-node-02"
+#10.0.0.60 hostname="pi-node-01"
+#10.0.0.32 hostname="pi-node-02"

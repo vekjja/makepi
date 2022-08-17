@@ -1,11 +1,10 @@
-
 - name: Enable cgroup_memory=1 cgroup_enable=memory
   become: yes
   lineinfile:
     path: /boot/cmdline.txt
     state: present
     backrefs: yes
-    regexp: '(.*rootwait)'
+    regexp: "(.*rootwait)"
     line: '\1 cgroup_memory=1 cgroup_enable=memory'
   notify: Reboot the Machine
 
@@ -17,11 +16,20 @@
     insertafter: "{{ item.after }}"
     line: "{{ item.to }}"
   loop:
-    - {after: '# Static IP Config for Eth0', to: "# Static IP Config for Eth0"}
-    - {after: '# Static IP Config for Eth0', to: "interface eth0"}
-    - {after: "interface eth0", to: "static domain_name_servers={{ k3s.static.dns }}"}
-    - {after: "interface eth0", to: "static routers={{ k3s.static.router }}"}
-    - {after: "interface eth0", to: "static ip_address={{ ansible_default_ipv4.address }}"}
+    - {
+        after: "# Static IP Config for Eth0",
+        to: "# Static IP Config for Eth0",
+      }
+    - { after: "# Static IP Config for Eth0", to: "interface eth0" }
+    - {
+        after: "interface eth0",
+        to: "static domain_name_servers={{ k3s.static.dns }}",
+      }
+    - { after: "interface eth0", to: "static routers={{ k3s.static.router }}" }
+    - {
+        after: "interface eth0",
+        to: "static ip_address={{ ansible_default_ipv4.address }}",
+      }
   notify: Reboot the Machine
 
 - name: Set Hostname
@@ -44,8 +52,8 @@
     name: "{{ item.name }}"
     path: "{{ item.path }}"
   loop:
-    - {name: "iptables", path: "/usr/sbin/iptables-legacy"}
-    - {name: "ip6tables", path: "/usr/sbin/ip6tables-legacy"}
+    - { name: "iptables", path: "/usr/sbin/iptables-legacy" }
+    - { name: "ip6tables", path: "/usr/sbin/ip6tables-legacy" }
   notify: Reboot the Machine
 
 - name: Flush Handlers
@@ -54,11 +62,16 @@
     warn: false
 
 - name: Download K3S installer
-  get_url: 
+  get_url:
     url: "{{ k3s.url }}"
     dest: "{{ k3s.tmpfile }}"
-    mode: '0777'
+    mode: "0777"
 
+# TODO: Fix this --
+# [WARNING]: Module remote_tmp /tmp/.ansible/tmp did not exist and was created with a mode of 0700, this may cause issues when running as another user. To avoid this, create the remote_tmp dir with the correct
+# permissions manually
+
+# TODO: Make K3S Args configurable
 - name: Execute the K3S Installer
   shell: "{{ k3s.tmpfile }} --no-deploy servicelb --no-deploy traefik"
   when: "'k3sMaster' is in group_names"
@@ -103,6 +116,6 @@
   when: "'k3sNodes' is in group_names"
 
 - name: Remove the K3S Installer
-  file: 
+  file:
     path: "{{ k3s.tmpfile }}"
     state: absent

@@ -1,23 +1,15 @@
 #!/bin/bash
 
-kubectl create ns cert-manager ||:
-
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-
-helm install \
- cert-manager jetstack/cert-manager \
- --namespace cert-manager \
- --set installCRDs=true
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
 
 echo "Sleeping 30 seconds to wait for cert-manager webhooks"
 sleep 30
 
-echo Defining Cert Manager Cluster Issuers 
-# Certificate Issuer LetsEncrypt Staging 
+echo Defining Cert Manager Staging Cluster Issuers
+# Certificate Issuer LetsEncrypt Staging
 cat <<EOF | kubectl apply -f -
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
@@ -34,10 +26,11 @@ spec:
 ---
 EOF
 
+echo Defining Cert Manager Prod Cluster Issuers
 # Certificate Issuer LetsEncrypt Prod
 cat <<EOF | kubectl apply -f -
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
@@ -54,9 +47,10 @@ spec:
 ---
 EOF
 
+# Example Ingress Config
 # cat <<EOF | kubectl apply -n test -f -
 # ---
-# apiVersion: extensions/v1beta1
+# apiVersion: extensions/v1
 # kind: Ingress
 # metadata:
 #   name: my-ingress
