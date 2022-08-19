@@ -3,13 +3,13 @@ kind: Service
 metadata:
   name: {{ include "plex.fullname" . }}
   labels:
-    {{- include "plex.labels" . | nindent 4 }}
+    {{ include "plex.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
       protocol: {{ .Values.service.protocol }}
-      name: {{ fullname . }}-port
+      name: {{ include "plex.fullname" . }}-port
   selector:
     {{- include "plex.selectorLabels" . | nindent 4 }}

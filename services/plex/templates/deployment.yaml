@@ -37,14 +37,19 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
+            - name: plex
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
           livenessProbe:
             httpGet:
               path: /identity
-              port: {{ Values.service.port }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               path: /identity
-              port: {{ Values.service.port }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 60
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
@@ -54,8 +59,8 @@ spec:
             - name: PLEX_CLAIM
               value: "{{ .Values.claimToken }}"
             # kube-plex env vars
-            - name: PMS_INTERNAL_ADDRESS
-              value: http://{{ template "fullname" . }}:32400
+            # - name: PMS_INTERNAL_ADDRESS
+            #   value: http://{{ template "plex.fullname" . }}:32400
             - name: PMS_IMAGE
               value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
             - name: KUBE_NAMESPACE
@@ -63,10 +68,17 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
           volumeMounts:
-            - name: data
+            - name: plex-data
               mountPath: /data
-            - name: config
+            - name: plex-config
               mountPath: /config
+      volumes:
+      - name: plex-data
+        persistentVolumeClaim:
+          claimName: "{{- template "plex.fullname" . }}-data"
+      - name: plex-config
+        persistentVolumeClaim:
+          claimName: "{{- template "plex.fullname" . }}-config"
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
