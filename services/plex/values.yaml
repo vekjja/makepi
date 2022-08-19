@@ -45,13 +45,26 @@ claimToken: "claim-9EFqgBysZ4-_wkq4b1iX"
 # Set the timezone of the plex server
 timezone: America/New_York
 
+plexPort: "32400"
+
 service:
   type: LoadBalancer
   port: 32400
   targetPort: 32400
   protocol: TCP
+  # ports:
+  #   - name: plex
+  #     port: 32400
+  #     targetPort: 32400
+  #     protocol: TCP
+
+  #   - name: http
+  #     port: 80
+  #     targetPort: 80
+  #     protocol: TCP
 
 ingress:
+  port: 80
   enabled: true
   className: ""
   annotations:
@@ -60,29 +73,23 @@ ingress:
       cert-manager.io/cluster-issuer: "letsencrypt-prod",
     }
   hosts:
-    - host: plex.goodtobe.live
+    - host: plex.livingroom.cloud
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
-    - secretName: plex-goodtobe-live-tls
+    - secretName: plex-livingroom-cloud-tls
       hosts:
-        - plex.goodtobe.live
+        - plex.livingroom.cloud
 
 persistence:
   data:
     storageClass: "hdd-tera-300"
-    # The requested size of the volume to be used when creating a
-    # PersistentVolumeClaim.
     size: 100Gi
-    # Access mode for this volume
     accessMode: ReadWriteMany
   config:
     storageClass: "ssd-pny250-1"
-    # The requested size of the volume to be used when creating a
-    # PersistentVolumeClaim.
     size: 1Gi
-    # Access mode for this volume
     accessMode: ReadWriteMany
 
 resources:
