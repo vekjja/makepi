@@ -1,12 +1,12 @@
 # Inventory File for Ansible
 
 [raspberries:children]
-k3sMaster
+k3sAdmins
 k3sNodes
 
-[k3sMaster]
-10.0.0.221 hostname="pi-master"
+[k3sAdmins]
+10.0.0.10 hostname="pi-kube-admin" k3sIP="10.0.0.10"
 
 [k3sNodes]
-#10.0.0.60 hostname="pi-node-01"
-#10.0.0.32 hostname="pi-node-02"
+#10.0.0.60 hostname="pi-kube-node-01" k3sIP="10.0.0.9"
+#10.0.0.32 hostname="pi-kube-node-02" k3sIP="10.0.0.8"

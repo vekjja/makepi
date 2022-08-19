@@ -5,6 +5,23 @@ install_ohmyzsh: yes
 ssh:
   PasswordAuthentication: "yes"
 
+apple:
+  brew:
+    cask:
+      - docker
+    packages:
+      - curl
+      - git
+      - hddtemp
+      - htop
+      - jq
+      - neovim
+      # - nfs-common
+      # - steamlink
+      - wakeonlan
+      - wget
+      - zsh
+
 apt:
   - autojump
   - ctags
@@ -49,6 +66,7 @@ k3s:
   url: https://get.k3s.io
   nodetoken: /var/lib/rancher/k3s/server/node-token
   kubeconfig: /etc/rancher/k3s/k3s.yaml
+  adminIP: 10.0.0.10
   args: "--no-deploy servicelb --no-deploy traefik"
   local_kubeconfig: ~/.kube/k3sconfig
   static:

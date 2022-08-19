@@ -50,11 +50,11 @@ ingress:
       cert-manager.io/cluster-issuer: "letsencrypt-prod",
     }
   hosts:
-    - plex.kevinjayne.cloud
+    - plex.goodtobe.live
   tls:
-    - secretName: plex-kevinjayne-cloud-tls
+    - secretName: plex-goodtobe-live-tls
       hosts:
-        - plex.kevinjayne.cloud
+        - plex.goodtobe.live
 
 rbac:
   create: true

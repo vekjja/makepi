@@ -1,4 +1,4 @@
-# ZSH 
+# ZSH
 # Add SSH Agent
 #eval $(ssh-agent)
 
@@ -34,10 +34,10 @@ plugins=(git)
 export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE=$HOME/.history/zsh_history
-  # ZSH Globals
-export UPDATE_ZSH_DAYS=7                # Update every week
-  # zsh configuration
-COMPLETION_WAITING_DOTS="true"          # Waiting dots
+# ZSH Globals
+export UPDATE_ZSH_DAYS=7 # Update every week
+# zsh configuration
+COMPLETION_WAITING_DOTS="true" # Waiting dots
 # HIST_STAMPS="mm.dd.yyyy"                # history timestamp formatting
 # DISABLE_CORRECTION="true"             # Disable command autocorrection
 # CASE_SENSITIVE="true"                 # Case sensitive completion
@@ -53,7 +53,7 @@ bindkey -e
 #### PATH ####
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:~/.local/bin"
 
-  ## Python
+## Python
 export PATH=~/Library/Python/2.7/bin:$PATH
 export PATH=~/Library/Python/3.6/bin:$PATH
 
@@ -90,8 +90,8 @@ alias gco="git checkout"
 alias gpm="git add .;git commit;git push"
 alias gpn="git add .;git commit;git push --no-verify"
 #git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
-function gprune(){
-  git remote prune origin 
+function gprune() {
+  git remote prune origin
   git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D
 }
 function gpa() {
@@ -99,8 +99,9 @@ function gpa() {
   git commit -am ${1}
   git push
 }
-  
+
 #### Quick Dial ####
+alias please="sudo"
 alias hack_hosts="sudo vim /etc/hosts"
 alias temp="/opt/vc/bin/vcgencmd measure_temp"
 
@@ -112,14 +113,14 @@ function dec() {
   openssl des -d -in ${1} -out ${2:-decrypted.txt}
 }
 
-function decode()
-{
-  echo;echo ${1-TXVzdCBQcm92aWRlIEJhc2U2NCBFbmNvZGVkIFN0cmluZwo} | base64 --decode
+function decode() {
+  echo
+  echo ${1-TXVzdCBQcm92aWRlIEJhc2U2NCBFbmNvZGVkIFN0cmluZwo} | base64 --decode
 }
 
 #### Autojump ####
 #[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
-if [ $commands[autojump] ]; then # check if autojump is installed
+if [ $commands[autojump] ]; then                             # check if autojump is installed
   if [ -f $HOME/.autojump/etc/profile.d/autojump.zsh ]; then # manual user-local installation
     . $HOME/.autojump/etc/profile.d/autojump.zsh
   elif [ -f $HOME/.autojump/share/autojump/autojump.zsh ]; then # another manual user-local installation
@@ -136,8 +137,8 @@ if [ $commands[autojump] ]; then # check if autojump is installed
     . /usr/local/share/autojump/autojump.zsh
   elif [ -f /opt/local/etc/profile.d/autojump.zsh ]; then # mac os x with ports
     . /opt/local/etc/profile.d/autojump.zsh
-  elif [ $commands[brew] -a -f `brew --prefix`/etc/autojump.zsh ]; then # mac os x with brew
-    . `brew --prefix`/etc/autojump.zsh
+  elif [ $commands[brew] -a -f $(brew --prefix)/etc/autojump.zsh ]; then # mac os x with brew
+    . $(brew --prefix)/etc/autojump.zsh
   fi
 fi
 
