@@ -73,14 +73,14 @@ ingress:
       cert-manager.io/cluster-issuer: "letsencrypt-prod",
     }
   hosts:
-    - host: plex.livingroom.cloud
+    - host: plex.kevinjayne.cloud
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
-    - secretName: plex-livingroom-cloud-tls
+    - secretName: plex.kevinjayne.cloud-tls
       hosts:
-        - plex.livingroom.cloud
+        - plex.kevinjayne.cloud
 
 persistence:
   data:
