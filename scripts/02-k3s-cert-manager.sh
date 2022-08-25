@@ -15,14 +15,14 @@ metadata:
   name: letsencrypt-staging
 spec:
   acme:
-    email: seemywings@gmail.com
     server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: seemywings@gmail.com
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-    - http01:
-        ingress:
-          class: nginx
+      - http01:
+          ingress:
+            class: nginx
 ---
 EOF
 
@@ -36,14 +36,14 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    email: seemywings@gmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
+    email: seemywings@gmail.com
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
-    - http01:
-        ingress:
-          class: nginx
+      - http01:
+          ingress:
+            class: nginx
 ---
 EOF
 
