@@ -355,10 +355,6 @@ spec:
       port: 443
       protocol: TCP
       targetPort: https
-    - name: acme
-      port: 8089
-      protocol: TCP
-      targetPort: acme
   selector:
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: ingress-nginx
@@ -463,9 +459,6 @@ spec:
               protocol: TCP
             - containerPort: 8443
               name: webhook
-              protocol: TCP
-            - containerPort: 8089
-              name: acme
               protocol: TCP
           readinessProbe:
             failureThreshold: 3
