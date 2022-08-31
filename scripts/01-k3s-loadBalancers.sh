@@ -8,7 +8,8 @@
 # ╚═╝░░░░░╚═╝╚══════╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝╚══════╝╚═════╝░
 #
 # https://metallb.universe.tf/installation/
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.4/config/manifests/metallb-native.yaml
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.4/config/manifests/metallb-native.yaml
+kubectl apply -f ./yaml/metallb-native_v0.13.4.yaml
 
 # Create MetalLB Address Pool
 cat <<EOF | kubectl apply -f -
@@ -35,23 +36,6 @@ metadata:
 ---
 EOF
 
-# ███╗░░██╗░██████╗░██╗███╗░░██╗██╗░░██╗░░░░░░██╗███╗░░██╗░██████╗░██████╗░███████╗░██████╗░██████╗
-# ████╗░██║██╔════╝░██║████╗░██║╚██╗██╔╝░░░░░░██║████╗░██║██╔════╝░██╔══██╗██╔════╝██╔════╝██╔════╝
-# ██╔██╗██║██║░░██╗░██║██╔██╗██║░╚███╔╝░█████╗██║██╔██╗██║██║░░██╗░██████╔╝█████╗░░╚█████╗░╚█████╗░
-# ██║╚████║██║░░╚██╗██║██║╚████║░██╔██╗░╚════╝██║██║╚████║██║░░╚██╗██╔══██╗██╔══╝░░░╚═══██╗░╚═══██╗
-# ██║░╚███║╚██████╔╝██║██║░╚███║██╔╝╚██╗░░░░░░██║██║░╚███║╚██████╔╝██║░░██║███████╗██████╔╝██████╔╝
-# ╚═╝░░╚══╝░╚═════╝░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░░░░╚═╝╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝╚══════╝╚═════╝░╚═════╝░
-#
-# Official nginx-ingress documentation: https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/
-
-helm repo add nginx-stable https://helm.nginx.com/stable
-helm repo update
-
-kubectl create namespace nginx-ingress
-helm install nginx-ingress nginx-stable/nginx-ingress --namespace nginx-ingress --set defaultBackend.enabled=false
-
-:
-
 # ██╗███╗░░██╗░██████╗░██████╗░███████╗░██████╗░██████╗░░░░░░███╗░░██╗░██████╗░██╗███╗░░██╗██╗░░██╗
 # ██║████╗░██║██╔════╝░██╔══██╗██╔════╝██╔════╝██╔════╝░░░░░░████╗░██║██╔════╝░██║████╗░██║╚██╗██╔╝
 # ██║██╔██╗██║██║░░██╗░██████╔╝█████╗░░╚█████╗░╚█████╗░█████╗██╔██╗██║██║░░██╗░██║██╔██╗██║░╚███╔╝░
@@ -61,12 +45,13 @@ helm install nginx-ingress nginx-stable/nginx-ingress --namespace nginx-ingress 
 # Official Kubernetes Ingress: https://kubernetes.github.io/ingress-nginx/deploy/
 
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f ./yaml/ingress-nginx_v1.3.0.yaml
 
-# # Wait for ingress controller to be ready
-# kubectl wait --namespace ingress-nginx \
-#   --for=condition=ready pod \
-#   --selector=app.kubernetes.io/component=controller \
-#   --timeout=120s
+# Wait for ingress controller to be ready
+kubectl wait --namespace ingress-nginx \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller \
+  --timeout=120s
 
-# # View LoadBalancer External IP
-# kubectl get service ingress-nginx-controller --namespace=ingress-nginx
+# View LoadBalancer External IP
+kubectl get service ingress-nginx-controller --namespace=ingress-nginx
