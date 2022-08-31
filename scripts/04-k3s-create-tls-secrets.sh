@@ -2,14 +2,27 @@
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
-domains=(
+publicWeb=(
+  "kevinjayne.cloud"
   "petname.ga"
 )
 
-for domain in "${domains[@]}"; do
-  echo "Creating TLS secret for $domain"
+plex=(
+  "kevinjayne.cloud"
+)
+
+for domain in "${publicWeb[@]}"; do
+  echo "Creating TLS secrets for $domain"
   kubectl create secret tls ${domain}-tls \
-    --cert=${SCRIPT_DIR}/../secrets/$domain/tls.cert \
-    --key=${SCRIPT_DIR}/../secrets/$domain/tls.key \
-    --namespace ingress-nginx
+    --key "${SCRIPT_DIR}/../secrets/${domain}/tls.key" \
+    --cert "${SCRIPT_DIR}/../secrets/${domain}/tls.cert" \
+    --namespace public-web
+done
+
+for domain in "${plex[@]}"; do
+  echo "Creating TLS secrets for $domain"
+  kubectl create secret tls ${domain}-tls \
+    --key "${SCRIPT_DIR}/../secrets/${domain}/tls.key" \
+    --cert "${SCRIPT_DIR}/../secrets/${domain}/tls.cert" \
+    --namespace plex
 done
