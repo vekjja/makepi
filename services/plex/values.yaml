@@ -66,12 +66,8 @@ service:
 ingress:
   port: 80
   enabled: true
-  className: ""
-  annotations:
-    {
-      kubernetes.io/ingress.class: "nginx",
-      cert-manager.io/cluster-issuer: "letsencrypt-prod",
-    }
+  className: "nginx"
+  annotations: { cert-manager.io/cluster-issuer: "letsencrypt-prod" }
   hosts:
     - host: plex.kevinjayne.cloud
       paths:
