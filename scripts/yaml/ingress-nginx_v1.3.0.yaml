@@ -355,8 +355,7 @@ spec:
       port: 443
       protocol: TCP
       targetPort: https
-    - appProtocol: acme
-      name: acme
+    - name: acme
       port: 8089
       protocol: TCP
       targetPort: acme
@@ -464,6 +463,9 @@ spec:
               protocol: TCP
             - containerPort: 8443
               name: webhook
+              protocol: TCP
+            - containerPort: 8089
+              name: acme
               protocol: TCP
           readinessProbe:
             failureThreshold: 3
