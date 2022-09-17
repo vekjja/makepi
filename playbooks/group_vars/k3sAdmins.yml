@@ -2,14 +2,14 @@ install_k3s: true
 
 fs_mounts:
   - {
-      path: /mnt/hdd/media,
-      src: "UUID=B2AE1CCEAE1C8D4B",
+      path: /mnt/ssd/movies,
+      src: "UUID=0CB81103B810ED48",
       fstype: ntfs,
       opts: "defaults,nobootwait,nofail,errors=remount-ro",
     }
   - {
-      path: /mnt/hdd/str,
-      src: "UUID=04D873930CCCBD41",
+      path: /mnt/ssd/series,
+      src: "UUID=56885E3A885E18B7",
       fstype: ntfs,
       opts: "defaults,nobootwait,nofail,errors=remount-ro",
     }
@@ -28,7 +28,7 @@ fs_mounts:
   # - {path: /path/to/mount/point, src: "UUID={YOUR-UID}", fstype: {file-system-type}, opts: "defaults,nobootwait,nofail,errors=remount-ro"}
 
 nfs_shares:
-  - /mnt/hdd/media *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
-  - /mnt/hdd/str *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
+  - /mnt/ssd/movies *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
+  - /mnt/ssd/series *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
   - /mnt/hdd/tera *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
   - /mnt/ssd/pny250 *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)

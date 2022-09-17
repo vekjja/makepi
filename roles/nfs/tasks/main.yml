@@ -1,5 +1,3 @@
-
-
 - name: Install NFS Server Packages
   become: true
   apt:
