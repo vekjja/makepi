@@ -7,34 +7,33 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "hdd-tera-300"
+  name: "ssd-movies"
 spec:
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: "hdd-tera-300"
+  storageClassName: "ssd-movies"
   capacity:
-    storage: "300Gi"
+    storage: "900Gi"
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/hdd/tera"
+    path: "/mnt/ssd/movies"
 EOF
 
-# Create Media PV
 cat <<EOF | kubectl apply -f -
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "ssd-pny250-120"
+  name: "ssd-series"
 spec:
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: "ssd-pny250-120"
+  storageClassName: "ssd-series"
   capacity:
-    storage: "120Gi"
+    storage: "900Gi"
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/ssd/pny250"
+    path: "/mnt/ssd/series"
 EOF
 
 # Create Media PV

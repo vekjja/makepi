@@ -68,14 +68,19 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
           volumeMounts:
-            - name: plex-data
-              mountPath: /data
+            - name: plex-movies
+              mountPath: /data/movies
+            - name: plex-series
+              mountPath: /data/series
             - name: plex-config
               mountPath: /config
       volumes:
-      - name: plex-data
+      - name: plex-movies
         persistentVolumeClaim:
-          claimName: "{{- template "plex.fullname" . }}-data"
+          claimName: "{{- template "plex.fullname" . }}-movies"
+      - name: plex-series
+        persistentVolumeClaim:
+          claimName: "{{- template "plex.fullname" . }}-series"
       - name: plex-config
         persistentVolumeClaim:
           claimName: "{{- template "plex.fullname" . }}-config"

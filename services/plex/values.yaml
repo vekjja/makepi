@@ -79,8 +79,12 @@ ingress:
         - plex.kevinjayne.cloud
 
 persistence:
-  data:
-    storageClass: "hdd-tera-300"
+  movies:
+    storageClass: "ssd-movies"
+    size: 100Gi
+    accessMode: ReadWriteMany
+  series:
+    storageClass: "ssd-series"
     size: 100Gi
     accessMode: ReadWriteMany
   config:

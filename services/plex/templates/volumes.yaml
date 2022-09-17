@@ -21,18 +21,38 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ template "plex.fullname" . }}-data
+  name: {{ template "plex.fullname" . }}-movies
   labels:
     app: {{ template "plex.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    component: data
+    component: movies
 spec:
   accessModes:
-  - {{ .Values.persistence.data.accessMode | quote }}
+  - {{ .Values.persistence.movies.accessMode | quote }}
   resources:
     requests:
-      storage: {{ .Values.persistence.data.size | quote }}
-  storageClassName: {{ .Values.persistence.data.storageClass | quote }}
+      storage: {{ .Values.persistence.movies.size | quote }}
+  storageClassName: {{ .Values.persistence.movies.storageClass | quote }}
+---
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "plex.fullname" . }}-series
+  labels:
+    app: {{ template "plex.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: series
+spec:
+  accessModes:
+  - {{ .Values.persistence.series.accessMode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.series.size | quote }}
+  storageClassName: {{ .Values.persistence.series.storageClass | quote }}
 ---
