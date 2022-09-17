@@ -69,9 +69,9 @@ spec:
                   fieldPath: metadata.namespace
           volumeMounts:
             - name: plex-movies
-              mountPath: /data/movies
+              mountPath: /data/Movies
             - name: plex-series
-              mountPath: /data/series
+              mountPath: "/data/TV Shows"
             - name: plex-config
               mountPath: /config
       volumes:
