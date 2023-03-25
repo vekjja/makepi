@@ -7,52 +7,103 @@
 # ╚█████╔╝███████╗██║░░██║░░░██║░░░░░░░░░██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║╚██████╔╝███████╗██║░░██║
 # ░╚════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░░░░░░░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░╚═════╝░╚══════╝╚═╝░░╚═╝
 
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
 
-echo "Sleeping 30 seconds to wait for cert-manager webhooks"
-sleep 30
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: cert-manager
+  name: cloudflare-api-token-secret
+type: Opaque
+stringData:
+  api-token: <API TOKEN>
+---
+EOF
 
-echo Defining Cert Manager Staging Cluster Issuers
-# Certificate Issuer LetsEncrypt Staging
 cat <<EOF | kubectl apply -f -
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-staging
+  name: cloudlfare-letsencrypt-staging
 spec:
   acme:
+    email: seemywings@gmail.com
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: seemywings@gmail.com
     privateKeySecretRef:
-      name: letsencrypt-staging
+      name: cloudflare-issuer-account-key
     solvers:
-      - http01:
-          ingress:
-            class: nginx
+    - dns01:
+        cloudflare:
+          apiTokenSecretRef:
+            name: cloudflare-api-token-secret
+            key: api-token
 ---
 EOF
 
-echo Defining Cert Manager Prod Cluster Issuers
-# Certificate Issuer LetsEncrypt Prod
 cat <<EOF | kubectl apply -f -
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-prod
+  name: cloudlfare-letsencrypt-production
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
     email: seemywings@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-prod
+      name: cloudflare-issuer-account-key
     solvers:
-      - http01:
-          ingress:
-            class: nginx
+    - dns01:
+        cloudflare:
+          apiTokenSecretRef:
+            name: cloudflare-api-token-secret
+            key: api-token
 ---
 EOF
+
+# Personal ISP Blocks Port 80 So HTTP ACME Challenge Fails
+# Certificate Issuer LetsEncrypt Staging
+# cat <<EOF | kubectl apply -f -
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: ClusterIssuer
+# metadata:
+#   name: letsencrypt-staging
+# spec:
+#   acme:
+#     server: https://acme-staging-v02.api.letsencrypt.org/directory
+#     email: seemywings@gmail.com
+#     privateKeySecretRef:
+#       name: letsencrypt-staging-issuer-key
+#     solvers:
+#       - http01:
+#           ingress:
+#             class: nginx
+# ---
+# EOF
+
+# Certificate Issuer LetsEncrypt Prod
+# cat <<EOF | kubectl apply -f -
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: ClusterIssuer
+# metadata:
+#   name: letsencrypt-prod
+# spec:
+#   acme:
+#     server: https://acme-v02.api.letsencrypt.org/directory
+#     email: seemywings@gmail.com
+#     privateKeySecretRef:
+#       name: letsencrypt-prod-issuer-key
+#     solvers:
+#       - http01:
+#           ingress:
+#             class: nginx
+# ---
+# EOF
 
 # Example Ingress Config
 # cat <<EOF | kubectl apply -n test -f -
@@ -63,7 +114,7 @@ EOF
 #   name: my-ingress
 #   annotations:
 #     kubernetes.io/ingress.class: "nginx"
-#     cert-manager.io/cluster-issuer: "letsencrypt-staging"
+#     cert-manager.io/cluster-issuer: "cloudflare-letsencrypt-staging"
 # spec:
 #   tls:
 #   - hosts:
