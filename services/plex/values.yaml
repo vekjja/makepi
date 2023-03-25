@@ -1,14 +1,10 @@
 # Default values for plex.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  # repository: plexinc/pms-docker
   repository: linuxserver/plex
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
 imagePullSecrets: []
@@ -16,12 +12,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # Specifies whether a service account should be created
   create: false
-  # Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
   name: ""
 
 podAnnotations: {}
@@ -30,16 +22,9 @@ podSecurityContext:
   {}
   # fsGroup: 2000
 
-securityContext:
-  {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext: {}
 
-# Override this with the plex claim token from https://plex.tv/claim
+# Plex claim token from https://plex.tv/claim
 claimToken: "claim-9EFqgBysZ4-_wkq4b1iX"
 
 # Set the timezone of the plex server
@@ -48,35 +33,26 @@ timezone: America/New_York
 plexPort: "32400"
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 32400
   targetPort: 32400
   protocol: TCP
-  # ports:
-  #   - name: plex
-  #     port: 32400
-  #     targetPort: 32400
-  #     protocol: TCP
-
-  #   - name: http
-  #     port: 80
-  #     targetPort: 80
-  #     protocol: TCP
 
 ingress:
   port: 80
   enabled: true
   className: "nginx"
-  annotations: { cert-manager.io/cluster-issuer: "letsencrypt-prod" }
+  annotations:
+    { cert-manager.io/cluster-issuer: "cloudflare-letsencrypt-staging" }
   hosts:
-    - host: plex.kevinjayne.cloud
+    - host: plex.livingroom.cloud
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls:
-    - secretName: kevinjayne.cloud-tls
+    - secretName: plex.livingroom.cloud-tls
       hosts:
-        - plex.kevinjayne.cloud
+        - plex.livingroom.cloud
 
 persistence:
   movies:
@@ -92,18 +68,7 @@ persistence:
     size: 1Gi
     accessMode: ReadWriteMany
 
-resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+resources: {}
 
 autoscaling:
   enabled: false
