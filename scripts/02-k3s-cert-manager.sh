@@ -7,7 +7,8 @@
 # ╚█████╔╝███████╗██║░░██║░░░██║░░░░░░░░░██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║╚██████╔╝███████╗██║░░██║
 # ░╚════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░░░░░░░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░╚═════╝░╚══════╝╚═╝░░╚═╝
 
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+# kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+kubectl apply -f ./yaml/cert-manager_v1.11.0.yaml
 
 cat <<EOF | kubectl apply -f -
 ---
@@ -15,7 +16,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   namespace: cert-manager
-  name: cloudflare-api-token-secret
+  name: cloudflare-api-token
 type: Opaque
 stringData:
   api-token: <API TOKEN>
@@ -38,7 +39,7 @@ spec:
     - dns01:
         cloudflare:
           apiTokenSecretRef:
-            name: cloudflare-api-token-secret
+            name: cloudflare-api-token
             key: api-token
 ---
 EOF
@@ -59,13 +60,15 @@ spec:
     - dns01:
         cloudflare:
           apiTokenSecretRef:
-            name: cloudflare-api-token-secret
+            name: cloudflare-api-token
             key: api-token
 ---
 EOF
 
-# Personal ISP Blocks Port 80 So HTTP ACME Challenge Fails
+#
+# ℹ️ Personal ISP Blocks Port 80 So HTTP ACME Challenge Fails
 # Certificate Issuer LetsEncrypt Staging
+#
 # cat <<EOF | kubectl apply -f -
 # ---
 # apiVersion: cert-manager.io/v1
@@ -85,7 +88,9 @@ EOF
 # ---
 # EOF
 
+#
 # Certificate Issuer LetsEncrypt Prod
+#
 # cat <<EOF | kubectl apply -f -
 # ---
 # apiVersion: cert-manager.io/v1
@@ -105,7 +110,9 @@ EOF
 # ---
 # EOF
 
+#
 # Example Ingress Config
+#
 # cat <<EOF | kubectl apply -n test -f -
 # ---
 # apiVersion: extensions/v1
