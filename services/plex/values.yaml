@@ -39,11 +39,10 @@ service:
   protocol: TCP
 
 ingress:
-  port: 80
   enabled: true
   className: "nginx"
   annotations:
-    { cert-manager.io/cluster-issuer: "cloudflare-letsencrypt-staging" }
+    { cert-manager.io/cluster-issuer: "cloudlfare-letsencrypt-production" }
   hosts:
     - host: plex.livingroom.cloud
       paths:
