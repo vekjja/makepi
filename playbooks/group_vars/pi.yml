@@ -9,9 +9,11 @@ apt:
   - coreutils
   - curl
   - git
+  - golang-go
   - htop
   - jq
   - lm-sensors
+  - libasound2-dev
   - neovim
   - nfs-common
   - tree
@@ -21,6 +23,7 @@ apt:
 directories:
   - ~/.config/nvim
   - ~/.history
+  - ~/.git
   - ~/.go
 
 config_files:
@@ -28,3 +31,8 @@ config_files:
   - { src: ".vimrc", dest: "~/.vimrc" }
   - { src: ".bashrc", dest: "~/.bashrc" }
   - { src: "init.vim", dest: "~/.config/nvim/init.vim" }
+
+repos:
+  local_dir: ~/git
+  sources:
+    - { src: 'git@github.com:seemywingz/ponder.git', dest: 'ponder'}

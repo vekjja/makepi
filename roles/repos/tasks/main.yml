@@ -1,0 +1,7 @@
+- name: Clone Repositories
+  git:
+    repo: "{{ item.src }}"
+    dest: "{{ repos.local_dir }}/{{ item.dest }}"
+    accept_hostkey: yes
+  with_items:
+    - "{{ repos.sources }}"

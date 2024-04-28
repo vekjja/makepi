@@ -34,6 +34,10 @@
   with_fileglob:
     - files/pub_keys/*.pub
 
+- name: Generate SSH Key Pair
+  openssh_keypair:
+    path: ~/.ssh/id_rsa
+
 - name: SSH Password Authentication
   become: true
   lineinfile:
