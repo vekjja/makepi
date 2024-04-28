@@ -17,8 +17,8 @@ apple:
       - htop
       - jq
       - neovim
-      # - nfs-common
-      # - steamlink
+      - nfs-common
+      - steamlink
       - wakeonlan
       - wget
       - zsh
