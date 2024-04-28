@@ -25,12 +25,6 @@ fs_mounts:
       fstype: ntfs, 
       opts: "defaults,nobootwait,nofail,errors=remount-ro"
     }
-  # - {
-  #     path: /mnt/hdd/tera,
-  #     src: "UUID=D4504CF8504CE33A",
-  #     fstype: ntfs,
-  #     opts: "defaults,nobootwait,nofail,errors=remount-ro",
-  #   }
 
   # EXAMPLE CONFIGURATION:
   # - {
@@ -45,4 +39,3 @@ nfs_shares:
   - /mnt/ssd/series *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
   - /mnt/ssd/fourtb *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
   - /mnt/ssd/pny250 *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
-  # - /mnt/hdd/tera *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)

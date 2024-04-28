@@ -28,21 +28,18 @@ apt:
   - coreutils
   - curl
   - git
-  - hddtemp
   - htop
   - jq
   - lm-sensors
+  - libasound2-dev
   - neovim
   - nfs-common
-  - steamlink
-  - terminator
   - wakeonlan
   - wget
   - zsh
 
 directories:
   - ~/.config/nvim
-  - ~/.config/terminator
   - ~/.history
 
 config_files:
@@ -50,7 +47,6 @@ config_files:
   - { src: ".vimrc", dest: "~/.vimrc" }
   - { src: ".bashrc", dest: "~/.bashrc" }
   - { src: "init.vim", dest: "~/.config/nvim/init.vim" }
-  - { src: "terminator.config", dest: "~/.config/terminator/config" }
 
 # Order Matters!
 autostart:

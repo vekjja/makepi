@@ -1,7 +1,7 @@
 # EMN DevOps initializer
 
-- name: Provision Raspberry Pi Entertainment Consoles
-  hosts: raspberries
+- name: Provision Raspberry Pi Consoles
+  hosts: pi
   gather_facts: true
   tasks:
 
@@ -13,24 +13,6 @@
         name: config
       tags: [ 'init','init-all', 'config' ]
   
-    - import_role:
-        name: autostart
-      tags: [ 'init-all','init-all', 'autostart' ]
-
-    - import_role:
-        name: fs
-      tags: [ 'init-all', 'fs' ]
-      when: fs_mounts is defined
-    
-    - import_role:
-        name: nfs
-      tags: [ 'init-all', 'nfs' ]
-      when: nfs_shares is defined or nfs_mounts is defined
-  
-    - import_role:
-        name: k3s
-      tags: [ 'init-all', 'k3s' ]
-      when: install_k3s|bool
   
   handlers:
      - import_tasks: ../handlers/main.yml
