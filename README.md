@@ -8,4 +8,4 @@
 ╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝░░░░░░╚═╝░░░░░╚═╝
 ```
 ---
-Raspberry Pi (Buster) Ansible Playbooks
+Raspberry Pi Ansible Playbooks

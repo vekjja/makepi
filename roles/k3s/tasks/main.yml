@@ -1,5 +1,5 @@
 - name: Enable cgroup_memory=1 cgroup_enable=memory
-  become: yes
+  become: true
   lineinfile:
     path: /boot/cmdline.txt
     state: present
@@ -9,7 +9,7 @@
   notify: Reboot the Machine
 
 - name: Set Current IP as Static
-  become: yes
+  become: true
   lineinfile:
     path: /etc/dhcpcd.conf
     state: present
@@ -30,13 +30,13 @@
   notify: Reboot the Machine
 
 - name: Set Hostname
-  become: yes
+  become: true
   hostname:
     name: "{{ hostname }}"
   notify: Reboot the Machine
 
 - name: Update /etc/hosts
-  become: yes
+  become: true
   lineinfile:
     path: /etc/hosts
     regexp: '^127\.0\.1\.1'
@@ -44,7 +44,7 @@
   notify: Reboot the Machine
 
 - name: Use Legacy IPtables
-  become: yes
+  become: true
   alternatives:
     name: "{{ item.name }}"
     path: "{{ item.path }}"
@@ -74,8 +74,8 @@
   when: "'k3sAdmins' is in group_names"
 
 - name: Get K3S Kubeconfig
-  become: yes
-  run_once: yes
+  become: true
+  run_once: true
   fetch:
     src: "{{ k3s.kubeconfig }}"
     dest: "{{ k3s.local_kubeconfig }}"
@@ -86,7 +86,7 @@
 
 - name: Update Local Kubeconfig
   delegate_to: localhost
-  run_once: yes
+  run_once: true
   replace:
     path: "{{ k3s.local_kubeconfig}}"
     regexp: '127\.0\.0\.1'
@@ -95,8 +95,8 @@
     - get-kubeconfig
 
 - name: Get K3S Node Token
-  become: yes
-  run_once: yes
+  become: true
+  run_once: true
   delegate_to: "{{ groups['k3sAdmins'][0] }}"
   shell: cat {{ k3s.nodetoken }}
   register: nodetoken

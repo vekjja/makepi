@@ -38,11 +38,10 @@ export HISTFILE=$HOME/.history/zsh_history
 export UPDATE_ZSH_DAYS=7 # Update every week
 # zsh configuration
 COMPLETION_WAITING_DOTS="true" # Waiting dots
-# HIST_STAMPS="mm.dd.yyyy"                # history timestamp formatting
+HIST_STAMPS="mm.dd.yyyy"       # history timestamp formatting
 # DISABLE_CORRECTION="true"             # Disable command autocorrection
 # CASE_SENSITIVE="true"                 # Case sensitive completion
 # DISABLE_UNTRACKED_FILES_DIRTY="true"  # Don't show untracked files
-# ZSH_CUSTOM=/path/to/new-custom-folder # Use alternative custom folder
 zstyle ':completion:*' completer _complete _ignored
 zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
@@ -60,6 +59,21 @@ export PATH=~/Library/Python/3.6/bin:$PATH
 #### Oh My ZSH ####
 source $ZSH/oh-my-zsh.sh
 
+## Go
+# export GO111MODULE=off
+export GOPATH="${HOME}/.go"
+export GOBIN=$GOPATH/bin
+export PATH="$PATH:${GOBIN}"
+
+# Terminal Colors
+export PURP='\033[0;35m'
+export BLU='\033[0;34m'
+export YEL='\033[0;33m'
+export RED='\033[0;31m'
+export GRN='\033[0;92m'
+export WHT='\033[0;37m'
+export NC='\033[0m' # No Color
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -74,8 +88,6 @@ alias t="tree"
 alias l="tree -L 1"
 alias cls="clear"
 alias la="ls -lha --color=auto"
-alias wakeGameBox="wakeonlan -i 10.255.255.255 a8:5e:45:e3:e2:2e"
-alias startSteam="wakeGameBox;steamlink"
 alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias listening="lsof -nP +c 15 | grep LISTEN"
 
@@ -105,19 +117,6 @@ alias please="sudo"
 alias hack_hosts="sudo vim /etc/hosts"
 alias temp="/opt/vc/bin/vcgencmd measure_temp"
 
-function enc() {
-  openssl des -in ${1} -out ${1}.enc
-}
-
-function dec() {
-  openssl des -d -in ${1} -out ${2:-decrypted.txt}
-}
-
-function decode() {
-  echo
-  echo ${1-TXVzdCBQcm92aWRlIEJhc2U2NCBFbmNvZGVkIFN0cmluZwo} | base64 --decode
-}
-
 #### Autojump ####
 #[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 if [ $commands[autojump] ]; then                             # check if autojump is installed
@@ -141,6 +140,3 @@ if [ $commands[autojump] ]; then                             # check if autojump
     . $(brew --prefix)/etc/autojump.zsh
   fi
 fi
-
-# Don't Share History per session
-# unsetopt share_history

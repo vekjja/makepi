@@ -1,0 +1,29 @@
+install_ohmyzsh: yes
+
+ssh:
+  user: admin
+  PasswordAuthentication: "yes"
+
+apt:
+  - autojump
+  - coreutils
+  - curl
+  - git
+  - htop
+  - jq
+  - lm-sensors
+  - neovim
+  - nfs-common
+  - wget
+  - zsh
+
+directories:
+  - ~/.config/nvim
+  - ~/.history
+  - ~/.go
+
+config_files:
+  - { src: ".zshrc", dest: "~/.zshrc" }
+  - { src: ".vimrc", dest: "~/.vimrc" }
+  - { src: ".bashrc", dest: "~/.bashrc" }
+  - { src: "init.vim", dest: "~/.config/nvim/init.vim" }

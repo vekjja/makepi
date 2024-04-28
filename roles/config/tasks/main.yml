@@ -20,16 +20,22 @@
     dest: ~/.oh-my-zsh
   when: install_ohmyzsh|bool
 
+- name: change user shell to zsh 
+  become: true
+  user:
+    name: "{{ ssh.user }}"
+    shell: /bin/zsh
+
 - name: Set Authorized Keys
   authorized_key:
-    user: pi
+    user: "{{ ssh.user }}"
     state: present
     key: "{{ lookup('file', item) }}"
   with_fileglob:
     - files/pub_keys/*.pub
 
 - name: SSH Password Authentication
-  become: yes
+  become: true
   lineinfile:
     path: /etc/ssh/sshd_config
     state: present

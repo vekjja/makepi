@@ -7,12 +7,11 @@
 
     - import_role:
         name: apt
-      tags: [ 'init','init-all', 'apt' ]
+      tags: [ 'init', 'apt' ]
   
     - import_role:
         name: config
-      tags: [ 'init','init-all', 'config' ]
-  
+      tags: [ 'init', 'config' ]
   
   handlers:
      - import_tasks: ../handlers/main.yml

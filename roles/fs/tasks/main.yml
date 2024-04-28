@@ -1,7 +1,7 @@
 # vim:ft=ansible
 
 - name: Mount Devices to Local Filesystem
-  become: yes
+  become: true
   mount:
     path: "{{ item.path }}"
     src: "{{ item.src }}"
