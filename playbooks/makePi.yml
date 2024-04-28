@@ -15,7 +15,7 @@
     
     - import_role:
         name: repos
-      tags: [ 'init', 'repos' ]
+      tags: [ 'repos' ]
   
   handlers:
      - import_tasks: ../handlers/main.yml

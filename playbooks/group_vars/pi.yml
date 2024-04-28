@@ -6,16 +6,13 @@ ssh:
 
 apt:
   - autojump
-  - coreutils
   - curl
   - git
   - golang-go
   - htop
   - jq
-  - lm-sensors
   - libasound2-dev
   - neovim
-  - nfs-common
   - tree
   - wget
   - zsh
@@ -23,7 +20,6 @@ apt:
 directories:
   - ~/.config/nvim
   - ~/.history
-  - ~/.git
   - ~/.go
 
 config_files:
