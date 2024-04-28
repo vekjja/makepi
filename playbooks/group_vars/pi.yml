@@ -14,6 +14,7 @@ apt:
   - lm-sensors
   - neovim
   - nfs-common
+  - tree
   - wget
   - zsh
 
