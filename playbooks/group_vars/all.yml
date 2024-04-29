@@ -2,26 +2,6 @@
 
 install_ohmyzsh: yes
 
-ssh:
-  user: pi
-  PasswordAuthentication: "yes"
-
-apple:
-  brew:
-    cask:
-      - docker
-    packages:
-      - curl
-      - git
-      - hddtemp
-      - htop
-      - jq
-      - neovim
-      - nfs-common
-      - steamlink
-      - wakeonlan
-      - wget
-      - zsh
 
 apt:
   - autojump
@@ -52,14 +32,6 @@ config_files:
   - { src: ".bashrc", dest: "~/.bashrc" }
   - { src: "init.vim", dest: "~/.config/nvim/init.vim" }
   - { src: "terminator.config", dest: "~/.config/terminator/config" }
-
-# Order Matters!
-autostart:
-  - "@lxpanel --profile LXDE-pi"
-  - "@pcmanfm --desktop --profile LXDE-pi"
-  - "@xscreensaver -no-splash"
-  # - wakeonlan -i 10.0.0.255 a8:5e:45:e3:e2:2e
-  # - steamlink
 
 # Lightweight Kubernetes: https://github.com/k3s-io/k3s/releases/
 k3s:

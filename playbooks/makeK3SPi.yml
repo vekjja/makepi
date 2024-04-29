@@ -12,10 +12,6 @@
     - import_role:
         name: config
       tags: [ 'init','init-all', 'config' ]
-  
-    - import_role:
-        name: autostart
-      tags: [ 'init-all','init-all', 'autostart' ]
 
     - import_role:
         name: fs
