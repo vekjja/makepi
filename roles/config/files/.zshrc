@@ -66,6 +66,9 @@ export GOPATH="${HOME}/.go"
 export GOBIN=$GOPATH/bin
 export PATH="$PATH:${GOBIN}"
 
+## OpenAI
+export OPENAI_API_KEY=""
+
 # Terminal Colors
 export PURP='\033[0;35m'
 export BLU='\033[0;34m'

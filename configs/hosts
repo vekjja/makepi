@@ -12,5 +12,6 @@ k3sNodes
 #10.0.0.32 hostname="pi-kube-node-02" k3sIP="10.0.0.8"
 
 [pi]
+pi-sugar
 pi-zero
 pi-4

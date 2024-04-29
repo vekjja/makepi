@@ -1,4 +1,3 @@
-# EMN DevOps initializer
 
 - name: Provision Raspberry Pi Consoles
   hosts: pi
@@ -6,9 +5,13 @@
   tasks:
 
     - import_role:
+        name: system
+      tags: [ 'init', 'system' ]
+
+    - import_role:
         name: apt
       tags: [ 'init', 'apt' ]
-  
+
     - import_role:
         name: config
       tags: [ 'init', 'config' ]

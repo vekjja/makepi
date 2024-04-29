@@ -1,4 +1,3 @@
 .vscode
 .DS_Store
-
-secrets/
+configs/vault_pass
