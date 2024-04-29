@@ -1,12 +1,13 @@
 # Maintainer: Kevin Jayne
 
 install_ohmyzsh: yes
-
+ssh_keygen: true
+swapSize: 1024
+user: pi
 
 apt:
   - autojump
   - ctags
-  - coreutils
   - curl
   - git
   - hddtemp
@@ -15,9 +16,7 @@ apt:
   - lm-sensors
   - neovim
   - nfs-common
-  - steamlink
   - terminator
-  - wakeonlan
   - wget
   - zsh
 

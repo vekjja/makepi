@@ -1,9 +1,7 @@
-install_ohmyzsh: yes
-
-ssh:
-  user: admin
-
-swapSize: 1024
+install_ohmyzsh: true
+ssh_keygen: true
+swapsize: 1024
+user: admin
 
 apt:
   - autojump
@@ -32,7 +30,7 @@ config_files:
 repos:
   local_dir: ~/git
   sources:
-    - { src: 'git@github.com:seemywingz/ponder.git', dest: 'ponder'}
+    - { src: 'https://github.com/seemywingz/ponder.git', dest: 'ponder'}
 
 zsh_api_keys:
   - OPENAI_API_KEY: !vault |

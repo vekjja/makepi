@@ -31,10 +31,11 @@
 - name: change user shell to zsh 
   become: true
   user:
-    name: "{{ ssh.user }}"
+    name: "{{ user }}"
     shell: /bin/zsh
 
 - name: Generate SSH Key Pair
   openssh_keypair:
     path: ~/.ssh/id_rsa
+  when: ssh_keygen|bool
 
