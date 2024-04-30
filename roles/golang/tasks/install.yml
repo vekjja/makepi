@@ -1,0 +1,14 @@
+- name: Download go {{go.version}} tar file for linux-{{ go.arch }}
+  command: wget https://go.dev/dl/go{{go.version}}.linux-{{ go.arch }}.tar.gz
+
+- name: Delete previous go installation
+  become: true
+  command: rm -rf {{ go.root }}/go
+
+- name: Extract tar file to {{ go.root }}/go
+  become: true
+  command: tar -C {{ go.root }} -xzf go{{go.version}}.linux-{{ go.arch }}.tar.gz
+
+- name: Delete downloaded tar file
+  shell: rm -rf go{{go.version}}.linux-{{ go.arch }}.tar.gz*
+

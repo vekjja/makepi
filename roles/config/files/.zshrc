@@ -64,7 +64,8 @@ source $ZSH/oh-my-zsh.sh
 # export GO111MODULE=off
 export GOPATH="${HOME}/.go"
 export GOBIN=$GOPATH/bin
-export PATH="$PATH:${GOBIN}"
+export GOROOT="/usr/local/go"
+export PATH="$PATH:${GOBIN}:${GOROOT}/bin"
 
 ## OpenAI
 export OPENAI_API_KEY=""

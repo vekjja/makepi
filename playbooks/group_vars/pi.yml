@@ -3,11 +3,16 @@ ssh_keygen: true
 swapsize: 1024
 user: admin
 
+go:
+  install: true
+  version: 1.22.2
+  arch: arm64
+  root: /usr/local
+
 apt:
   - autojump
   - curl
   - git
-  - golang-go
   - htop
   - jq
   - libasound2-dev

@@ -1,0 +1,4 @@
+
+
+- include_tasks: install.yml
+  when: go.install|bool

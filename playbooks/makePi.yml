@@ -15,10 +15,14 @@
     - import_role:
         name: config
       tags: [ 'init', 'config' ]
+
+    - import_role:
+        name: golang
+      tags: [ 'init', 'golang' ]
     
     - import_role:
         name: repos
-      tags: [ 'repos' ]
+      tags: [ 'init', 'repos' ]
   
   handlers:
      - import_tasks: ../handlers/main.yml
