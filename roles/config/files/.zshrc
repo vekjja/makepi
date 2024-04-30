@@ -61,11 +61,11 @@ export PATH=~/Library/Python/3.6/bin:$PATH
 source $ZSH/oh-my-zsh.sh
 
 ## Go
-# export GO111MODULE=off
 export GOPATH="${HOME}/.go"
 export GOBIN=$GOPATH/bin
 export GOROOT="/usr/local/go"
 export PATH="$PATH:${GOBIN}:${GOROOT}/bin"
+export GOPROXY=https://proxy.golang.org,direct
 
 ## OpenAI
 export OPENAI_API_KEY=""
