@@ -10,8 +10,8 @@ K3sAdmin
 K3sNode
 
 [K3sAdmin]
-pi-k3s-admin staticIP="10.0.0.10" swapsize="4096"
+pi-k3s-admin.local staticIP="10.0.0.10" swapsize="4096"
 
 [K3sNode]
-pi-k3s-node-01 staticIP="10.0.0.9" swapsize="2048"
-pi-k3s-node-02 staticIP="10.0.0.8" swapsize="2048"
+pi-k3s-node-01.local staticIP="10.0.0.9" swapsize="2048"
+pi-k3s-node-02.local staticIP="10.0.0.8" swapsize="2048"

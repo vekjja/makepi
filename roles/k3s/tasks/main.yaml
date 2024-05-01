@@ -16,31 +16,14 @@
     dest: "{{ k3s.tmpfile }}"
     mode: "0777"
 
-# TODO: Make K3S Args configurable
 - name: Execute the K3S Installer
   when: "'K3sAdmin' is in group_names"
-  shell: "{{ k3s.tmpfile }} {{ k3s.args }}"
+  shell: "{{ k3s.tmpfile }} {{ k3s.args | join(' ')}}"
 
-- name: Get K3S Kubeconfig
-  when: "'K3sAdmin' is in group_names"
-  become: true
-  run_once: true
-  fetch:
-    src: "{{ k3s.kubeconfig }}"
-    dest: "{{ k3s.local_kubeconfig }}"
-    flat: yes
-  tags:
-    - get-kubeconfig
-
-- name: Update Local Ansible Host Kubeconfig
-  delegate_to: localhost
-  run_once: true
-  replace:
-    path: "{{ k3s.local_kubeconfig }}"
-    regexp: '127\.0\.0\.1'
-    replace: "{{ hostvars[groups['K3sAdmin'][0]]['ansible_default_ipv4']['address'] }}"
-  tags:
-    - get-kubeconfig
+- name: Remove the K3S Installer
+  file:
+    path: "{{ k3s.tmpfile }}"
+    state: absent
 
 - name: Get K3S Node Token
   become: true
@@ -56,7 +39,39 @@
     export K3S_TOKEN={{ nodetoken.stdout }}
     {{ k3s.tmpfile }}
 
-- name: Remove the K3S Installer
-  file:
-    path: "{{ k3s.tmpfile }}"
-    state: absent
+- name: Get K3S Kubeconfig
+  when: "'K3sAdmin' is in group_names"
+  become: true
+  run_once: true
+  fetch:
+    src: "{{ k3s.kubeconfig }}"
+    dest: "{{ k3s.local_kubeconfig }}"
+    flat: yes
+  tags: get-kubeconfig
+
+- name: Update Local Ansible Host Kubeconfig with K3S Server IP
+  delegate_to: localhost
+  run_once: true
+  replace:
+    path: "{{ k3s.local_kubeconfig }}"
+    regexp: '127\.0\.0\.1'
+    replace: "{{ hostvars[groups['K3sAdmin'][0]]['ansible_default_ipv4']['address'] }}"
+  tags: get-kubeconfig
+
+- name: Decode the CA certificate from Kubeconfig
+  delegate_to: localhost
+  run_once: true
+  become: true
+  shell: "cat {{ k3s.local_kubeconfig }} | grep 'certificate-authority-data' | awk '{print $2}' | base64 --decode > /tmp/ca.crt"
+  args:
+    executable: /bin/bash
+  tags: get-kubeconfig
+
+- name: Notify
+  debug:
+    msg: 
+      - To use the K3S cluster with Lense App, run the command below
+      - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /tmp/ca.crt
+  tags: get-kubeconfig
+
+

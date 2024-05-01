@@ -23,6 +23,7 @@ apt:
 directories:
   - ~/.config/nvim
   - ~/.history
+  - ~/.kube
 
 config_files:
   - { src: ".zshrc", dest: "~/.zshrc" }
@@ -34,8 +35,8 @@ network_manager:
   connections:
     - name: "Wired connection 1"
       interface_name: "eth0"
-    # - name: "preconfigured"
-    #   interface-name: "wlan0"
+    - name: "preconfigured"
+      interface_name: "wlan0"
   method: "manual"
   gateway: "10.0.0.1"
   dns:
@@ -49,5 +50,10 @@ k3s: # Lightweight Kubernetes: https://github.com/k3s-io/k3s/releases/
   url: https://get.k3s.io
   nodetoken: /var/lib/rancher/k3s/server/node-token
   kubeconfig: /etc/rancher/k3s/k3s.yaml
-  args: "--disable=traefik --prefer-bundled-bin"
-  local_kubeconfig: ~/.kube/k3sconfig
+  local_kubeconfig: "{{ lookup('env', 'HOME') }}/.kube/k3sconfig"
+  args:
+    - --write-kubeconfig-mode 644
+    - --write-kubeconfig ~/.kube/k3sconfig
+    - --disable=traefik
+    - --disable=servicelb
+    - --prefer-bundled-bin

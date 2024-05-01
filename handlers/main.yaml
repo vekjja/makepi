@@ -5,10 +5,21 @@
     msg: "Rebooting after configuration changes"
     reboot_timeout: 300  # Optional: Increase if your system takes longer to reboot
 
-- name: Restart dphys-swapfile Service
-  when: swapsize is defined
+- name: Restart dphys-swapfile
   become: true
   systemd:
     name: dphys-swapfile
     daemon_reload: true
     state: restarted
+
+- name: Restart NetworkManager
+  become: true
+  systemd:
+    name: NetworkManager
+    daemon_reload: true
+    state: restarted
+
+- name: Wait for NetworkManager to stabilize
+  pause:
+    seconds: 18
+  listen: "Restart NetworkManager"  # This will trigger along with the main NetworkManager restart handler

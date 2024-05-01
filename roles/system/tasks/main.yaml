@@ -7,9 +7,7 @@
     path: /etc/dphys-swapfile
     regexp: '^CONF_SWAPSIZE='
     line: 'CONF_SWAPSIZE={{ swapsize }}'
-  notify: Restart dphys-swapfile Service
-
-- meta: flush_handlers  # Ensures the Restart dphys-swapfile Service handler runs immediately if notified
+  notify: Restart dphys-swapfile
 
 - name: Check for existing network connections
   become: true
@@ -34,13 +32,13 @@
     ipv4.dns "{{ network_manager.dns | join(' ') }}"
   loop_control:
     label: "{{ item.name }}"
+  notify: Restart NetworkManager
 
 - name: Set Hostname
   when: hostname is defined
   become: true
   hostname:
     name: "{{ hostname }}"
-  notify: Reboot the Machine
 
 # - name: Update /etc/hosts
 #   when: hostname is defined
