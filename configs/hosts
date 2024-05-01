@@ -1,7 +1,6 @@
 # Inventory File for Ansible
 
 [Pi]
-pi-sugar swapsize="1024"
 pi-zero swapsize="1024"
 pi-4 swapsize="2048"
 
@@ -13,5 +12,4 @@ K3sNode
 pi-k3s-admin.local staticIP="10.0.0.10" swapsize="4096"
 
 [K3sNode]
-pi-k3s-node-01.local staticIP="10.0.0.9" swapsize="2048"
-pi-k3s-node-02.local staticIP="10.0.0.8" swapsize="2048"
+pi-sugar.local staticIP="10.0.0.9" swapsize="1024"

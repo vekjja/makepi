@@ -13,7 +13,6 @@ apt:
   - git
   - htop
   - jq
-  - lm-sensors
   - neovim
   - nfs-common
   - tree
