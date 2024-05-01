@@ -1,17 +1,17 @@
 # Inventory File for Ansible
 
-[raspberries:children]
-k3sAdmins
-k3sNodes
+[Pi]
+pi-sugar swapsize="1024"
+pi-zero swapsize="1024"
+pi-4 swapsize="2048"
 
-[k3sAdmins]
-10.0.0.10 hostname="pi-kube-admin" k3sIP="10.0.0.10"
+[K3sPi:children]
+K3sAdmin
+K3sNode
 
-[k3sNodes]
-#10.0.0.60 hostname="pi-kube-node-01" k3sIP="10.0.0.9"
-#10.0.0.32 hostname="pi-kube-node-02" k3sIP="10.0.0.8"
+[K3sAdmin]
+pi-k3s-admin staticIP="10.0.0.10" swapsize="4096"
 
-[pi]
-pi-sugar
-pi-zero
-pi-4
+[K3sNode]
+pi-k3s-node-01 staticIP="10.0.0.9" swapsize="2048"
+pi-k3s-node-02 staticIP="10.0.0.8" swapsize="2048"

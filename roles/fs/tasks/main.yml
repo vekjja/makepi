@@ -1,6 +1,6 @@
 # vim:ft=ansible
 
-- name: Mount Devices to Local Filesystem
+- name: Update /etc/fstab
   become: true
   mount:
     path: "{{ item.path }}"

@@ -1,7 +1,6 @@
-install_ohmyzsh: true
-ssh_keygen: true
-swapsize: 1024
+# Pi group variables
 user: admin
+ssh_keygen: true
 
 go:
   install: true
@@ -37,8 +36,12 @@ repos:
   sources:
     - { src: 'https://github.com/seemywingz/ponder.git', dest: 'ponder'}
 
-zsh_api_keys:
-  - OPENAI_API_KEY: !vault |
+zsh:
+  install: true
+  ohmyzsh: true
+  chsh: true
+  api_keys:
+    - OPENAI_API_KEY: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           38386630323239393739323333636530646466343166326535396439663336376632373261623437
           3733386235663166316439616362393338343161616166620a656137343535326336636133303332

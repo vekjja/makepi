@@ -1,0 +1,14 @@
+# Hnadlers
+- name: Reboot
+  become: true
+  reboot:
+    msg: "Rebooting after configuration changes"
+    reboot_timeout: 300  # Optional: Increase if your system takes longer to reboot
+
+- name: Restart dphys-swapfile Service
+  when: swapsize is defined
+  become: true
+  systemd:
+    name: dphys-swapfile
+    daemon_reload: true
+    state: restarted

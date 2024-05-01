@@ -1,28 +1,27 @@
-# Maintainer: Kevin Jayne
-
-install_ohmyzsh: yes
+# K3sPi group variables
+user: admin
 ssh_keygen: true
-swapSize: 1024
-user: pi
+
+zsh:
+  install: true
+  ohmyzsh: true
+  chsh: true
 
 apt:
   - autojump
-  - ctags
   - curl
   - git
-  - hddtemp
   - htop
   - jq
   - lm-sensors
   - neovim
   - nfs-common
-  - terminator
+  - tree
   - wget
   - zsh
 
 directories:
   - ~/.config/nvim
-  - ~/.config/terminator
   - ~/.history
 
 config_files:
@@ -30,17 +29,25 @@ config_files:
   - { src: ".vimrc", dest: "~/.vimrc" }
   - { src: ".bashrc", dest: "~/.bashrc" }
   - { src: "init.vim", dest: "~/.config/nvim/init.vim" }
-  - { src: "terminator.config", dest: "~/.config/terminator/config" }
 
-# Lightweight Kubernetes: https://github.com/k3s-io/k3s/releases/
-k3s:
+network_manager:
+  connections:
+    - name: "Wired connection 1"
+      interface_name: "eth0"
+    # - name: "preconfigured"
+    #   interface-name: "wlan0"
+  method: "manual"
+  gateway: "10.0.0.1"
+  dns:
+    - "10.0.0.1"
+    - "1.1.1.1"
+    - "8.8.8.8"
+    - "9.9.9.9"
+
+k3s: # Lightweight Kubernetes: https://github.com/k3s-io/k3s/releases/
   tmpfile: /tmp/k3s.sh
   url: https://get.k3s.io
   nodetoken: /var/lib/rancher/k3s/server/node-token
   kubeconfig: /etc/rancher/k3s/k3s.yaml
-  adminIP: 10.0.0.10
-  args: "--no-deploy servicelb --no-deploy traefik"
+  args: "--disable=traefik --prefer-bundled-bin"
   local_kubeconfig: ~/.kube/k3sconfig
-  static:
-    router: "10.0.0.1"
-    dns: "10.0.0.1 1.1.1.1 8.8.8.8"

@@ -1,0 +1,62 @@
+- name: Append cgroup settings to cmdline.txt only if absent
+  become: true
+  lineinfile:
+    path: /boot/firmware/cmdline.txt
+    regexp: '^(?!.*cgroup_memory=1.*cgroup_enable=memory)(.*)$'
+    line: '\1 cgroup_memory=1 cgroup_enable=memory'
+    backrefs: yes
+    state: present
+  notify: Reboot
+
+- meta: flush_handlers  # Ensures the Reboot handler runs immediately if notified
+
+- name: Download K3S installer
+  get_url:
+    url: "{{ k3s.url }}"
+    dest: "{{ k3s.tmpfile }}"
+    mode: "0777"
+
+# TODO: Make K3S Args configurable
+- name: Execute the K3S Installer
+  when: "'K3sAdmin' is in group_names"
+  shell: "{{ k3s.tmpfile }} {{ k3s.args }}"
+
+- name: Get K3S Kubeconfig
+  when: "'K3sAdmin' is in group_names"
+  become: true
+  run_once: true
+  fetch:
+    src: "{{ k3s.kubeconfig }}"
+    dest: "{{ k3s.local_kubeconfig }}"
+    flat: yes
+  tags:
+    - get-kubeconfig
+
+- name: Update Local Ansible Host Kubeconfig
+  delegate_to: localhost
+  run_once: true
+  replace:
+    path: "{{ k3s.local_kubeconfig }}"
+    regexp: '127\.0\.0\.1'
+    replace: "{{ hostvars[groups['K3sAdmin'][0]]['ansible_default_ipv4']['address'] }}"
+  tags:
+    - get-kubeconfig
+
+- name: Get K3S Node Token
+  become: true
+  run_once: true
+  delegate_to: "{{ groups['K3sAdmin'][0] }}"
+  shell: cat {{ k3s.nodetoken }}
+  register: nodetoken
+
+- name: Join K3s Cluster as Node
+  when: "'K3sNode' is in group_names"
+  shell: |
+    export K3S_URL=https://{{ hostvars[groups['K3sAdmin'][0]]['ansible_eth0']['ipv4']['address'] }}:6443
+    export K3S_TOKEN={{ nodetoken.stdout }}
+    {{ k3s.tmpfile }}
+
+- name: Remove the K3S Installer
+  file:
+    path: "{{ k3s.tmpfile }}"
+    state: absent

@@ -1,29 +1,47 @@
 
-- name: Provision Raspberry Pi Consoles
-  hosts: pi
+- name: Provision Raspberry Pi Machines
   gather_facts: true
+  hosts: all
+
   tasks:
 
     - import_role:
         name: system
-      tags: [ 'init', 'system' ]
+      tags: [ 'system' ]
 
     - import_role:
         name: apt
-      tags: [ 'init', 'apt' ]
-
+      tags: [ 'apt' ]
+  
     - import_role:
-        name: config
-      tags: [ 'init', 'config' ]
+        name: configs
+      tags: [ 'configs' ]
 
     - import_role:
         name: golang
-      tags: [ 'init', 'golang' ]
+      tags: [ 'golang' ]
+      when: go is defined
+
+    - import_role:
+        name: fs
+      tags: [ 'fs' ]
+      when: fs_mounts is defined
     
     - import_role:
         name: repos
-      tags: [ 'init', 'repos' ]
+      tags: [ 'repos' ]
+      when: repos is defined
+
+    - import_role:
+        name: nfs
+      tags: [ 'nfs' ]
+      when: nfs_shares is defined or nfs_mounts is defined
   
+    - import_role:
+        name: k3s
+      tags: [ 'k3s' ]
+      when: k3s is defined
+
   handlers:
-     - import_tasks: ../handlers/main.yml
+     - import_tasks: ../handlers/main.yaml
 

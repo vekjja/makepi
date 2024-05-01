@@ -1,9 +1,0 @@
-# vim:ft=ansible
-
-- name: Update Swap File Size
-  become: true
-  lineinfile:
-    path: /etc/dphys-swapfile
-    regexp: '^CONF_SWAPSIZE='
-    line: 'CONF_SWAPSIZE={{ swapSize }}'
-  notify: Restart Swap Service

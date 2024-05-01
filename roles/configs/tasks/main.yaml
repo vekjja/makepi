@@ -21,18 +21,20 @@
     regexp: "export {{ item.key }}="
     line: "export {{ item.key }}=\"{{ item.value }}\""
   with_dict: "{{ zsh_api_keys }}"
+  when: zsh.api_keys is defined
 
 - name: Install Oh My ZSH
   git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: ~/.oh-my-zsh
-  when: install_ohmyzsh|bool
+  when: zsh.ohmyzsh|bool
 
 - name: change user shell to zsh 
   become: true
   user:
     name: "{{ user }}"
     shell: /bin/zsh
+  when: zsh.chsh|bool
 
 - name: Generate SSH Key Pair
   openssh_keypair:

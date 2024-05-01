@@ -1,0 +1,52 @@
+# vim:ft=ansible
+
+- name: Update Swap File Size in /etc/dphys-swapfile to {{ swapsize }}
+  when: swapsize is defined
+  become: true
+  lineinfile:
+    path: /etc/dphys-swapfile
+    regexp: '^CONF_SWAPSIZE='
+    line: 'CONF_SWAPSIZE={{ swapsize }}'
+  notify: Restart dphys-swapfile Service
+
+- meta: flush_handlers  # Ensures the Restart dphys-swapfile Service handler runs immediately if notified
+
+- name: Check for existing network connections
+  become: true
+  command: nmcli -t -f NAME con show
+  register: nmcli_connections
+  changed_when: false
+  failed_when: false
+
+- name: Modify Current Network Connections and set Static IP with nmcli
+  when:
+    - network_manager is defined
+    - staticIP is defined
+    - item.name in nmcli_connections.stdout
+  become: true
+  loop: "{{ network_manager.connections }}"
+  command: >
+    nmcli connection modify "{{ item.name }}"
+    connection.id "{{ item.interface_name }}"
+    ipv4.method manual
+    ipv4.addresses "{{ staticIP }}"/24
+    ipv4.gateway "{{ network_manager.gateway }}"
+    ipv4.dns "{{ network_manager.dns | join(' ') }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Set Hostname
+  when: hostname is defined
+  become: true
+  hostname:
+    name: "{{ hostname }}"
+  notify: Reboot the Machine
+
+# - name: Update /etc/hosts
+#   when: hostname is defined
+#   become: true
+#   lineinfile:
+#     path: /etc/hosts
+#     regexp: '^127\.0\.1\.1'
+#     line: 127.0.1.1   {{ hostname }}
+#   notify: Reboot the Machine
