@@ -55,13 +55,12 @@
   replace:
     path: "{{ k3s.local_kubeconfig }}"
     regexp: '127\.0\.0\.1'
-    replace: "{{ hostvars[groups['K3sAdmin'][0]]['ansible_default_ipv4']['address'] }}"
+    replace: "{{ k3s.domain | default(hostvars[groups['K3sAdmin'][0]]['ansible_default_ipv4']['address']) }}"
   tags: get-kubeconfig
 
 - name: Decode the CA certificate from Kubeconfig
   delegate_to: localhost
   run_once: true
-  become: true
   shell: "cat {{ k3s.local_kubeconfig }} | grep 'certificate-authority-data' | awk '{print $2}' | base64 --decode > /tmp/ca.crt"
   args:
     executable: /bin/bash

@@ -47,8 +47,9 @@ network_manager:
 k3s: # Lightweight Kubernetes: https://github.com/k3s-io/k3s/releases/
   tmpfile: /tmp/k3s.sh
   url: https://get.k3s.io
+  domain: livingroom.cloud
   nodetoken: /var/lib/rancher/k3s/server/node-token
-  kubeconfig: /etc/rancher/k3s/k3s.yaml
+  kubeconfig: /home/admin/.kube/k3sconfig
   local_kubeconfig: "{{ lookup('env', 'HOME') }}/.kube/k3sconfig"
   args:
     - --write-kubeconfig-mode 644
@@ -56,3 +57,6 @@ k3s: # Lightweight Kubernetes: https://github.com/k3s-io/k3s/releases/
     - --disable=traefik
     - --disable=servicelb
     - --prefer-bundled-bin
+    - --tls-san 10.0.0.10
+    - --tls-san 174.44.106.30
+    - --tls-san livingroom.cloud
