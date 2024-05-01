@@ -49,13 +49,16 @@
     flat: yes
   tags: get-kubeconfig
 
-- name: Update Local Ansible Host Kubeconfig with K3S Server IP
+- name: Update Local Ansible Host Kubeconfig with multiple replacements
   delegate_to: localhost
   run_once: true
   replace:
     path: "{{ k3s.local_kubeconfig }}"
-    regexp: '127\.0\.0\.1'
-    replace: "{{ k3s.domain | default(hostvars[groups['K3sAdmin'][0]]['ansible_default_ipv4']['address']) }}"
+    regexp: "{{ item.regexp }}"
+    replace: "{{ item.replace }}"
+  loop:
+    - { regexp: '127\.0\.0\.1', replace: "{{ k3s.domain | default(hostvars[groups['K3sAdmin'][0]]['ansible_default_ipv4']['address']) }}" }
+    - { regexp: '\bdefault\b', replace: "{{ k3s.domain | default('k3s') }}" }
   tags: get-kubeconfig
 
 - name: Decode the CA certificate from Kubeconfig
