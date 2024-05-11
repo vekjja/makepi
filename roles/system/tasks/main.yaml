@@ -16,17 +16,17 @@
   changed_when: false
   failed_when: false
 
-- name: Modify Current Network Connections and set Static IP with nmcli
+- name: Configure Network Manager with nmcli
   when:
     - network_manager is defined
-    - staticIP is defined
     - item.name in nmcli_connections.stdout
   become: true
   loop: "{{ network_manager.connections }}"
   command: >
     nmcli connection modify "{{ item.name }}"
     connection.id "{{ item.interface_name }}"
-    ipv4.method manual
+    connection.autoconnect-priority "{{ item.priority }}"
+    ipv4.method "{{ item.method }}"
     ipv4.addresses "{{ staticIP }}"/24
     ipv4.gateway "{{ network_manager.gateway }}"
     ipv4.dns "{{ network_manager.dns | join(' ') }}"

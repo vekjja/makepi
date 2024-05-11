@@ -32,11 +32,26 @@ config_files:
 
 network_manager:
   connections:
-    - name: "Wired connection 1"
+    - name: "eth0"
+      type: "802-3-ethernet"
       interface_name: "eth0"
+      method: "manual"
+      priority: 10
+    - name: "Wired connection 1"
+      type: "802-3-ethernet"
+      interface_name: "eth0"
+      method: "manual"
+      priority: 1
     - name: "preconfigured"
+      type: "802-11-wireless"
       interface_name: "wlan0"
-  method: "manual"
+      method: "manual"
+      priority: 0
+    - name: "wlan0"
+      type: "802-11-wireless"
+      interface_name: "wlan0"
+      method: "manual"
+      priority: 0
   gateway: "10.0.0.1"
   dns:
     - "10.0.0.1"

@@ -20,6 +20,11 @@ apt:
   - wget
   - zsh
 
+ap_fallback:
+  apt:
+    - hostapd
+    - dnsmasq
+
 directories:
   - ~/.config/nvim
   - ~/.history
