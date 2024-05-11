@@ -19,15 +19,15 @@ fs_mounts:
     fstype: ntfs,
     opts: "defaults,nobootwait,nofail,errors=remount-ro",
   }
-  - {
-    path: /mnt/ssd/fourtb,
-    src: "UUID=1CE4F83F6303AD2D",
-    fstype: ntfs,
-    opts: "defaults,nobootwait,nofail,errors=remount-ro"
-  }
+  # - {
+  #   path: /mnt/ssd/fourtb,
+  #   src: "UUID=1CE4F83F6303AD2D",
+  #   fstype: ntfs,
+  #   opts: "defaults,nobootwait,nofail,errors=remount-ro"
+  # }
 
 nfs_shares:
   - /mnt/ssd/movies *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
   - /mnt/ssd/series *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
-  - /mnt/ssd/fourtb *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
+  # - /mnt/ssd/fourtb *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
   - /mnt/ssd/pny250 *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
