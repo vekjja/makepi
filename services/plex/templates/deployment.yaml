@@ -71,7 +71,7 @@ spec:
             - name: plex-movies
               mountPath: /data/Movies
             - name: plex-series
-              mountPath: "/data/TV Shows"
+              mountPath: "/data/Series"
             - name: plex-config
               mountPath: /config
       volumes:

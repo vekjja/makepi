@@ -7,8 +7,8 @@
 # ╚█████╔╝███████╗██║░░██║░░░██║░░░░░░░░░██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║╚██████╔╝███████╗██║░░██║
 # ░╚════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░░░░░░░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░╚═════╝░╚══════╝╚═╝░░╚═╝
 
-# kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
-kubectl apply -f ./yaml/cert-manager_v1.11.0.yaml
+# kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.yaml
+kubectl apply -f ./yaml/cert-manager_v1.14.5.yaml
 
 cat <<EOF | kubectl apply -f -
 ---
@@ -19,7 +19,7 @@ metadata:
   name: cloudflare-api-token
 type: Opaque
 stringData:
-  api-token: <API TOKEN>
+  api-token: 7aPlIF7wgngCLVS3XRdVRmlT5oPKK_wvTcqQoNLG
 ---
 EOF
 

@@ -25,7 +25,7 @@ podSecurityContext:
 securityContext: {}
 
 # Plex claim token from https://plex.tv/claim
-claimToken: "claim-9EFqgBysZ4-_wkq4b1iX"
+claimToken: "claim-ECh_J7FfgMvyseW-SCX-"
 
 # Set the timezone of the plex server
 timezone: America/New_York
@@ -63,8 +63,8 @@ persistence:
     size: 100Gi
     accessMode: ReadWriteMany
   config:
-    storageClass: "ssd-pny250-1"
-    size: 1Gi
+    storageClass: "ssd-pny250"
+    size: 10Gi
     accessMode: ReadWriteMany
 
 resources: {}

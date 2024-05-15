@@ -36,18 +36,34 @@ spec:
     path: "/mnt/ssd/series"
 EOF
 
-# Create Media PV
 cat <<EOF | kubectl apply -f -
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "ssd-pny250-1"
+  name: "hdd-tera"
 spec:
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: "ssd-pny250-1"
+  storageClassName: "hdd-tera"
   capacity:
-    storage: "1Gi"
+    storage: "900Gi"
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/hdd/tera"
+EOF
+
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "ssd-pny250"
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "ssd-pny250"
+  capacity:
+    storage: "207Gi"
   accessModes:
     - ReadWriteMany
   hostPath:
