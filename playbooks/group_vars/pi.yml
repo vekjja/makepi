@@ -4,7 +4,7 @@ ssh_keygen: true
 
 go:
   install: true
-  version: 1.22.2
+  version: 1.23.1
   arch: arm64
   root: /usr/local
 
@@ -40,6 +40,7 @@ repos:
   local_dir: ~/git
   sources:
     - { src: 'https://github.com/seemywingz/ponder.git', dest: 'ponder'}
+    - { src: 'https://github.com/seemywingz/rpin.git', dest: 'rpin'}
 
 zsh:
   install: true
