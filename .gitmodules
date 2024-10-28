@@ -1,3 +1,0 @@
-[submodule "services/plex/kube-plex"]
-	path = services/plex/kube-plex
-	url = https://github.com/munnerz/kube-plex.git
