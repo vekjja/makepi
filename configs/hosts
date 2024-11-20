@@ -2,8 +2,8 @@
 
 [Pi]
 pi-sugar.local swapsize="1024"
-pi-zero swapsize="1024"
-pi-4 swapsize="2048"
+pi-zero.local swapsize="1024"
+pi-5.local swapsize="2048"
 
 [K3sPi:children]
 K3sAdmin

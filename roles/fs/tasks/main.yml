@@ -1,5 +1,14 @@
 # vim:ft=ansible
 
+- name: Update Swap File Size in /etc/dphys-swapfile to {{ swapsize }}
+  when: swapsize is defined
+  become: true
+  lineinfile:
+    path: /etc/dphys-swapfile
+    regexp: '^CONF_SWAPSIZE='
+    line: 'CONF_SWAPSIZE={{ swapsize }}'
+  notify: Restart dphys-swapfile
+  
 - name: Update /etc/fstab
   become: true
   mount:

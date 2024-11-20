@@ -6,13 +6,13 @@
   tasks:
 
     - import_role:
-        name: system
-      tags: [ 'system' ]
-
-    - import_role:
         name: apt
       tags: [ 'apt' ]
-  
+
+    - import_role:
+        name: networking
+      tags: [ 'networking' ]
+
     - import_role:
         name: configs
       tags: [ 'configs' ]
@@ -23,14 +23,14 @@
       when: go is defined
 
     - import_role:
-        name: fs
-      tags: [ 'fs' ]
-      when: fs_mounts is defined
-    
-    - import_role:
         name: repos
       tags: [ 'repos' ]
       when: repos is defined
+      
+    - import_role:
+        name: fs
+      tags: [ 'fs' ]
+      when: fs_mounts is defined
 
     - import_role:
         name: nfs
