@@ -19,7 +19,7 @@ metadata:
   name: cloudflare-api-token
 type: Opaque
 stringData:
-  api-token: 7aPlIF7wgngCLVS3XRdVRmlT5oPKK_wvTcqQoNLG
+  api-token: ${CLOUDFLARE_API_TOKEN}
 ---
 EOF
 

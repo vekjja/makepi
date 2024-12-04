@@ -49,8 +49,8 @@ EOF
 # ╚═╝╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝╚══════╝╚═════╝░╚═════╝░░░░░░░╚═╝░░╚══╝░╚═════╝░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝
 # Official Kubernetes Ingress: https://kubernetes.github.io/ingress-nginx/deploy/
 
-# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/cloud/deploy.yaml
-kubectl apply -f ./yaml/ingress-nginx_v1.10.1.yaml
+# wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.3/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f ./yaml/ingress-nginx_v1.11.3.yaml
 
 # Wait for ingress controller to be ready
 kubectl wait --namespace ingress-nginx \
