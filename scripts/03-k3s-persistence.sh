@@ -52,37 +52,3 @@ spec:
   hostPath:
     path: "/mnt/ssd/pny250/Plex"
 EOF
-
-cat <<EOF | kubectl apply -f -
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: "psql-livingroom-cloud-primary"
-spec:
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: "psql-livingroom-cloud-primary"
-  capacity:
-    storage: "60Gi"
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/mnt/ssd/pny250/PSQL/livingroom.cloud/primary"
-EOF
-
-cat <<EOF | kubectl apply -f -
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: "psql-livingroom-cloud-replica"
-spec:
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: "psql-livingroom-cloud-replica"
-  capacity:
-    storage: "60Gi"
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/mnt/ssd/pny250/PSQL/livingroom.cloud/replica"
-EOF
