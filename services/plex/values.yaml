@@ -18,9 +18,7 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext:
-  {}
-  # fsGroup: 2000
+podSecurityContext: {} # fsGroup: 2000
 
 securityContext: {}
 
@@ -41,17 +39,16 @@ service:
 ingress:
   enabled: true
   className: "nginx"
-  annotations:
-    { cert-manager.io/cluster-issuer: "cloudlfare-letsencrypt-production" }
+  annotations: { cert-manager.io/cluster-issuer: "cloudlfare-letsencrypt-production" }
   hosts:
-    - host: plex.livingroom.cloud
-      paths:
-        - path: /
-          pathType: Prefix
+  - host: plex.livingroom.cloud
+    paths:
+    - path: /
+      pathType: Prefix
   tls:
-    - secretName: plex.livingroom.cloud-tls
-      hosts:
-        - plex.livingroom.cloud
+  - secretName: plex.livingroom.cloud-tls
+    hosts:
+    - plex.livingroom.cloud
 
 persistence:
   movies:
@@ -63,8 +60,8 @@ persistence:
     size: 100Gi
     accessMode: ReadWriteMany
   config:
-    storageClass: "ssd-pny250"
-    size: 10Gi
+    storageClass: "plex-config"
+    size: 3Gi
     accessMode: ReadWriteMany
 
 resources: {}

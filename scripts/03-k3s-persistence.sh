@@ -41,16 +41,16 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "hdd-tera"
+  name: "plex-config"
 spec:
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: "hdd-tera"
+  storageClassName: "plex-config"
   capacity:
-    storage: "900Gi"
+    storage: "6Gi"
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/hdd/tera"
+    path: "/mnt/ssd/pny250/Plex"
 EOF
 
 cat <<EOF | kubectl apply -f -
@@ -58,14 +58,14 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "ssd-pny250"
+  name: "psql-livingroom-cloud"
 spec:
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: "ssd-pny250"
+  storageClassName: "psql-livingroom-cloud"
   capacity:
-    storage: "207Gi"
+    storage: "60Gi"
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/ssd/pny250"
+    path: "/mnt/ssd/pny250/PSQL/livingroom.cloud"
 EOF
