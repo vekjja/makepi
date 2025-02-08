@@ -1,17 +1,17 @@
 # K3sAdmin Vars
 
 openvpn:
-  enabled: false
+  enabled: true
   vars:
     KEY_COUNTRY: "US"
     KEY_PROVINCE: "NY"
     KEY_CITY: "PleasantValley"
     KEY_ORG: "LivingRoomCloud"
     KEY_EMAIL: "kevin.jayne@icloud.com"
-    KEY_OU: "LivingRoomCloud"
+    KEY_OU: "VPN"
     KEY_NAME: "LivingRoomVPN"
-  client_name: "macair"
-  vpn_network: "10.0.10.0"
+  client_name: "client.livingroom.cloud"
+  vpn_network: "10.10.0.0"
   vpn_netmask: "255.255.255.0"
 
 

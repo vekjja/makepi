@@ -23,17 +23,3 @@
   pause:
     seconds: 18
   listen: "Restart NetworkManager" # This will trigger along with the main NetworkManager restart handler
-
-- name: Restart OpenVPN
-  become: true
-  systemd:
-    name: openvpn@server
-    state: restarted
-
-- name: Apply Sysctl
-  become: true
-  command: sysctl -p
-
-- name: Apply Firewall Rules
-  become: true
-  command: iptables-restore < /etc/iptables.rules

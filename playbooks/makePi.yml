@@ -28,11 +28,6 @@
       tags: [ 'k3s' ]
       when: k3s is defined
 
-    - import_role:
-        name: openvpn
-      tags: [ 'openvpn' ]
-      when: openvpn.enabled
-
   handlers:
      - import_tasks: ../handlers/main.yaml
 
