@@ -1,34 +1,16 @@
 # K3sPi group variables
-user: admin
-ssh_keygen: true
-
-zsh:
-  install: true
-  ohmyzsh: true
-  chsh: true
 
 apt:
   - autojump
   - curl
+  - btop
   - git
-  - htop
   - jq
-  - neovim
   - nfs-common
   - tree
+  - vim
   - wget
   - zsh
-
-directories:
-  - ~/.config/nvim
-  - ~/.history
-  - ~/.kube
-
-config_files:
-  - { src: ".zshrc", dest: "~/.zshrc" }
-  - { src: ".vimrc", dest: "~/.vimrc" }
-  - { src: ".bashrc", dest: "~/.bashrc" }
-  - { src: "init.vim", dest: "~/.config/nvim/init.vim" }
 
 network_manager:
   connections:

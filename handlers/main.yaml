@@ -3,7 +3,7 @@
   become: true
   reboot:
     msg: "Rebooting after configuration changes"
-    reboot_timeout: 300  # Optional: Increase if your system takes longer to reboot
+    reboot_timeout: 300 # Optional: Increase if your system takes longer to reboot
 
 - name: Restart dphys-swapfile
   become: true
@@ -22,4 +22,18 @@
 - name: Wait for NetworkManager to stabilize
   pause:
     seconds: 18
-  listen: "Restart NetworkManager"  # This will trigger along with the main NetworkManager restart handler
+  listen: "Restart NetworkManager" # This will trigger along with the main NetworkManager restart handler
+
+- name: Restart OpenVPN
+  become: true
+  systemd:
+    name: openvpn@server
+    state: restarted
+
+- name: Apply Sysctl
+  become: true
+  command: sysctl -p
+
+- name: Apply Firewall Rules
+  become: true
+  command: iptables-restore < /etc/iptables.rules

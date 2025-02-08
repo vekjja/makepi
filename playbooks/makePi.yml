@@ -1,5 +1,5 @@
 
-- name: Provision Raspberry Pi Machines
+- name: Provision Raspberry Pi K3S Cluster
   gather_facts: true
   hosts: all
 
@@ -14,20 +14,6 @@
       tags: [ 'networking' ]
 
     - import_role:
-        name: configs
-      tags: [ 'configs' ]
-
-    - import_role:
-        name: golang
-      tags: [ 'golang' ]
-      when: go is defined
-
-    - import_role:
-        name: repos
-      tags: [ 'repos' ]
-      when: repos is defined
-      
-    - import_role:
         name: fs
       tags: [ 'fs' ]
       when: fs_mounts is defined
@@ -36,11 +22,16 @@
         name: nfs
       tags: [ 'nfs' ]
       when: nfs_shares is defined or nfs_mounts is defined
-  
+
     - import_role:
         name: k3s
       tags: [ 'k3s' ]
       when: k3s is defined
+
+    - import_role:
+        name: openvpn
+      tags: [ 'openvpn' ]
+      when: openvpn.enabled
 
   handlers:
      - import_tasks: ../handlers/main.yaml

@@ -1,10 +1,5 @@
 # Inventory File for Ansible
 
-[Pi]
-pi-sugar.local swapsize="1024"
-pi-zero.local swapsize="1024"
-pi-5.local swapsize="2048"
-
 [K3sPi:children]
 K3sAdmin
 K3sNode
@@ -13,3 +8,6 @@ K3sNode
 pi-k3s-admin.local staticIP="10.0.0.10" swapsize="4096"
 
 [K3sNode]
+# pi-sugar.local swapsize="1024"
+# pi-zero.local swapsize="1024"
+# pi-5.local swapsize="2048"

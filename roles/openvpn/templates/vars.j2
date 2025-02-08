@@ -1,0 +1,3 @@
+{% for key, value in openvpn.vars.items() %}
+set_var {{ key }} "{{ value }}"
+{% endfor %}

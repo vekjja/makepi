@@ -1,5 +1,20 @@
 # K3sAdmin Vars
 
+openvpn:
+  enabled: false
+  vars:
+    KEY_COUNTRY: "US"
+    KEY_PROVINCE: "NY"
+    KEY_CITY: "PleasantValley"
+    KEY_ORG: "LivingRoomCloud"
+    KEY_EMAIL: "kevin.jayne@icloud.com"
+    KEY_OU: "LivingRoomCloud"
+    KEY_NAME: "LivingRoomVPN"
+  client_name: "macair"
+  vpn_network: "10.0.10.0"
+  vpn_netmask: "255.255.255.0"
+
+
 fs_mounts:
   - {
     path: /mnt/ssd/movies,
