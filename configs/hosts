@@ -5,7 +5,7 @@ K3sAdmin
 K3sNode
 
 [K3sAdmin]
-pi-k3s-admin.local staticIP="10.0.0.10" swapsize="4096"
+pi-cloud.local staticIP="10.0.0.10" swapsize="4096"
 
 [K3sNode]
 # pi-sugar.local swapsize="1024"
