@@ -2,3 +2,4 @@
 .DS_Store
 .ansible
 configs/vault_pass
+*.swp
