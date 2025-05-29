@@ -58,21 +58,6 @@ kubectl wait --namespace ingress-nginx \
   --selector=app.kubernetes.io/component=controller \
   --timeout=120s
 
-# Create ConfigMap for UDP Services
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: udp-services
-  namespace: ingress-nginx
-data:
-  "1194": "openvpn/openvpn:1194"
-EOF
-
-# Patch Ingress Controller to Support UDP Services
-kubectl patch deployment ingress-nginx-controller -n ingress-nginx \
-  --type=json -p='[{"op": "add", "path": "/spec/template/spec/volumes/-", "value": {"name": "udp-services", "configMap": {"name": "udp-services"}}},{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--udp-services-configmap=$(POD_NAMESPACE)/udp-services"}]'
-
 # Restart Ingress Controller
 kubectl rollout restart deployment ingress-nginx-controller -n ingress-nginx
 
