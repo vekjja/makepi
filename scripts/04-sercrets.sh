@@ -1,6 +1,6 @@
 #!/bin/bash
 
-kubectl create secret docker-registry ghcr-seemywingz-pull \
+kubectl create secret docker-registry ghcr-secret \
   --docker-server=ghcr.io \
-  --docker-username=seemywingz \
+  --docker-username=vekjja \
   --docker-password=${GITHUB_PAT}
