@@ -69,6 +69,33 @@
     executable: /bin/bash
   tags: get-kubeconfig
 
+- name: Download K9s binary for ARM64
+  when: "'K3sAdmin' is in group_names"
+  become: true
+  get_url:
+    url: "https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_arm64.tar.gz"
+    dest: "/tmp/k9s.tar.gz"
+  tags: k9s
+
+- name: Extract K9s binary
+  when: "'K3sAdmin' is in group_names"
+  become: true
+  unarchive:
+    src: "/tmp/k9s.tar.gz"
+    dest: "/usr/local/bin/"
+    remote_src: yes
+    extra_opts: [--no-same-owner]
+  tags: k9s
+
+- name: Ensure K9s binary is executable
+  when: "'K3sAdmin' is in group_names"
+  become: true
+  file:
+    path: "/usr/local/bin/k9s"
+    mode: '0755'
+    state: file
+  tags: k9s
+
 - name: Notify
   run_once: true
   debug:
@@ -76,5 +103,3 @@
       - To use the K3S cluster with Lense App, run the command below
       - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /tmp/ca.crt
   tags: get-kubeconfig
-
-
